@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:security="http://www.springframework.org/schema/security"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<security:global-method-security />
+
+	<security:http auto-config="true" disable-url-rewriting="true" use-expressions="true">
+
+		<!-- Account -->
+		<security:intercept-url pattern="/person*"   requires-channel="any" access="isAuthenticated()"/>
+		
+		<!-- Default log in -->
+		<security:form-login login-page="/login" login-processing-url="/loginProcessing" always-use-default-target="true"
+				authentication-failure-url="/login?login_error=true" default-target-url="/person"/>
+		<!-- Default log out -->
+		<security:logout invalidate-session="true" logout-url="/logout" delete-cookies="JSESSIONID"/>
+		<!-- Maximum session -->
+		<security:session-management>
+        	<security:concurrency-control max-sessions="10" error-if-maximum-exceeded="true" expired-url="/login"/>
+        </security:session-management>
+
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="AuthenticationService">
+			<security:password-encoder ref="PasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+  
+	<bean id="PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+	</bean>
+
+	<bean id="AuthenticationService" class="com.spgo.security.WebUserDetailsService">
+	</bean>
+
+</beans>
