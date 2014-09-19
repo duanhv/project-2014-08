@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.spgo.model.web.PersonInfo;
+import com.spgo.model.web.EmployeeInfo;
 
 @SuppressWarnings("serial")
 public class AppWebUserDetails extends WebUserDetails {
@@ -19,7 +19,7 @@ public class AppWebUserDetails extends WebUserDetails {
 		String USER_ATTR = "USER";
 	}
 	
-	public AppWebUserDetails(PersonInfo details, String role) {
+	public AppWebUserDetails(EmployeeInfo details, String role) {
         if (details != null) {
             // +++
         	super.addAttr(Keys.USER_ATTR, details);
@@ -38,9 +38,9 @@ public class AppWebUserDetails extends WebUserDetails {
      * 
      * @return
      */
-    public PersonInfo getUser() {
+    public EmployeeInfo getUser() {
     	try {
-    		return (PersonInfo)this.getAttr(Keys.USER_ATTR);
+    		return (EmployeeInfo)this.getAttr(Keys.USER_ATTR);
     	} catch (Exception e) {
     		return null;
     	}
@@ -51,7 +51,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	 */
 	@Override
 	public String getPassword() {
-		PersonInfo details = this.getUser();
+		EmployeeInfo details = this.getUser();
 		return (details != null ? details.getPassword() : null);
 	}
 
@@ -60,7 +60,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	 */
 	@Override
 	public String getUsername() {
-		PersonInfo details = this.getUser();
+		EmployeeInfo details = this.getUser();
 		return (details != null ? details.getLoginId() : null);
 	}
 
@@ -125,7 +125,7 @@ public class AppWebUserDetails extends WebUserDetails {
 	@Override
 	public String getLoginId() {
 
-		PersonInfo details = this.getUser();
+		EmployeeInfo details = this.getUser();
 		return (details != null ? details.getLoginId() : null);
 
 	}

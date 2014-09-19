@@ -13,11 +13,11 @@
 	<security:http auto-config="true" disable-url-rewriting="true" use-expressions="true">
 
 		<!-- Account -->
-		<security:intercept-url pattern="/person*"   requires-channel="any" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/employee*"   requires-channel="any" access="isAuthenticated()"/>
 		
 		<!-- Default log in -->
 		<security:form-login login-page="/login" login-processing-url="/loginProcessing" always-use-default-target="true"
-				authentication-failure-url="/login?login_error=true" default-target-url="/person"/>
+				authentication-failure-url="/login?login_error=true" default-target-url="/employee"/>
 		<!-- Default log out -->
 		<security:logout invalidate-session="true" logout-url="/logout" delete-cookies="JSESSIONID"/>
 		<!-- Maximum session -->

@@ -3,7 +3,7 @@ package com.spgo.model.web;
 import java.io.Serializable;
 import java.util.Date;
 
-public class PersonInfo implements Serializable {
+public class EmployeeInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

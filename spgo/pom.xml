@@ -105,6 +105,6 @@
 		
   </dependencies>
   <build>
-    <finalName>Spring4Mongo</finalName>
+    <finalName>spgo</finalName>
   </build>
 </project>

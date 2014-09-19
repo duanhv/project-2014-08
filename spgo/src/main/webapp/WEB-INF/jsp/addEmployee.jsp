@@ -2,7 +2,7 @@
 <html>
 <body>
 	<h2>Guest.....</h2>
- 	<form action="person/save" method="post">
+ 	<form action="employee/save" method="post">
  		<input type="hidden" name="id">
  		<table width="500" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px; margin-bottom:30px;">
 			<tr>
@@ -14,7 +14,7 @@
 				<td><input type="text" id="password" name="password"/></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Submit"/></td>
+				<td colspan="2"><input type="submit" value="Create New Employee"/></td>
 			</tr>
 		</table>
 	</form>

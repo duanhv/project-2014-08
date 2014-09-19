@@ -7,15 +7,15 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.spgo.business.EmployeeManager;
 import com.spgo.common.Constants;
-import com.spgo.model.web.PersonInfo;
-import com.spgo.service.PersonService;
+import com.spgo.model.web.EmployeeInfo;
 
 public class WebUserDetailsService implements IWebUserDetailsService, InitializingBean {
 	Logger log = Logger.getLogger(WebUserDetailsService.class);
 
 	@Autowired
-	private PersonService personService;
+	private EmployeeManager personService;
 
 	/*
      * (non-Javadoc)
@@ -26,9 +26,9 @@ public class WebUserDetailsService implements IWebUserDetailsService, Initializi
     	final String LOCATION = "loadUserByUsername(loginId:" + loginId + ")";
     	 log.debug(LOCATION + ":: START");
     		WebUserDetails user = null;
-    		PersonInfo person = null;
+    		EmployeeInfo person = null;
     	try {
-    		person = personService.getPersonByLoginId(loginId);
+    		person = personService.getEmployeeByLoginId(loginId);
     		if (person == null) {        			
                 log.info("User not found!!!");
     			throw new UsernameNotFoundException("User not found!!!");
