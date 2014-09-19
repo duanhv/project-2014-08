@@ -1,17 +1,17 @@
-package com.spgo.service;
+package com.spgo.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 
-import com.spgo.dao.PersonDao;
+import com.spgo.dao.EmployeeDao;
 
-public abstract class BaseService {
+public abstract class BaseManager {
 
 	@Autowired
-	private PersonDao personDao;
+	private EmployeeDao employeeDao;
 
-	protected PersonDao getPersonDao() {
-		return personDao;
+	protected EmployeeDao getEmployeeDao() {
+		return employeeDao;
 	}
 	
 	public String encodeString(String str) {

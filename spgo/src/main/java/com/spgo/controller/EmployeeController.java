@@ -12,68 +12,68 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.spgo.model.web.PersonInfo;
-import com.spgo.service.PersonService;
+import com.spgo.business.EmployeeManager;
+import com.spgo.model.web.EmployeeInfo;
    
 @Controller    
-public class PersonController {  
+public class EmployeeController {  
    
 	@Autowired
-	private PersonService personService;
+	private EmployeeManager employeeManager;
 
-    @RequestMapping(value = "/person/save", method = RequestMethod.POST)  
-	public View createPerson(@ModelAttribute PersonInfo person, ModelMap model) {
+    @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
+	public View createEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model) {
     	try {
-	    	person.setBirthDay(new Date());
-	    	if(StringUtils.hasText(person.getId())) {
-	    		personService.updatePerson(person);
+	    	employee.setBirthDay(new Date());
+	    	if(StringUtils.hasText(employee.getId())) {
+	    		employeeManager.updateEmployee(employee);
 	    	} else {
-	    		personService.addPerson(person);
+	    		employeeManager.addEmployee(employee);
 	    	}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return new RedirectView("/spgo/person");  
+    	return new RedirectView("/spgo/employee");  
     }
         
-    @RequestMapping(value = "/person/delete", method = RequestMethod.GET)  
-	public View deletePerson(@ModelAttribute PersonInfo person, ModelMap model) {  
+    @RequestMapping(value = "/employee/delete", method = RequestMethod.GET)  
+	public View deleteEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model) {  
 	    try {
-	    	personService.deletePerson(person);
+	    	employeeManager.deleteEmployee(employee);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        return new RedirectView("/spgo/person");  
+        return new RedirectView("/spgo/employee");  
     }
     
-    @RequestMapping(value = "/person", method = RequestMethod.GET)  
-	public String getPersonList(ModelMap model) {
+    @RequestMapping(value = "/employee", method = RequestMethod.GET)  
+	public String getEmployeeList(ModelMap model) {
     	try {
-    		model.addAttribute("personList", personService.listPerson());
+    		model.addAttribute("employeeList", employeeManager.listEmployee());
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
-        return "listPerson";  
+        return "listEmployee";  
     } 
 
     // Guest (allow to add new)
     @RequestMapping(value = "/guest", method = RequestMethod.GET)  
 	public String getGuest(ModelMap model) {
-        return "addPerson";  
+        return "addEmployee";  
     }
     @RequestMapping(value = "/guest/save", method = RequestMethod.POST)  
-	public View createGuest(@ModelAttribute PersonInfo person, ModelMap model) {
+	public View createGuest(@ModelAttribute EmployeeInfo employee, ModelMap model) {
     	try {
-	    	person.setBirthDay(new Date());
-	    	if(StringUtils.hasText(person.getId())) {
-	    		personService.updatePerson(person);
+	    	employee.setBirthDay(new Date());
+	    	if(StringUtils.hasText(employee.getId())) {
+	    		employeeManager.updateEmployee(employee);
 	    	} else {
-	    		personService.addPerson(person);
+	    		employeeManager.addEmployee(employee);
 	    	}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	return new RedirectView("/spgo/person");  
+    	return new RedirectView("/spgo/employee");  
     }
 
     // Login-Logout

@@ -10,13 +10,10 @@
 	</sec:authorize>
 
 	<c:if test="${webAuth}">
-  	 	LoginId:&nbsp;${principal.username}
+  	 	LoginId:&nbsp;${principal.username}&nbsp;&nbsp;&nbsp;<a href='<c:url value="logout"/>'>Log out</a>
   	</c:if>
-	<c:if test="${webAuth}">
-	 	<a href='<c:url value="logout"/>'>Log out</a>
-	</c:if>
   
- 	<form action="person/save" method="post">
+ 	<form action="employee/save" method="post">
  		<input type="hidden" name="id">
  		<table width="500" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px; margin-bottom:30px;">
 			<tr>
@@ -39,12 +36,12 @@
 			<th>Password MD5</th>
 			<th>Birthday</th>
 		</tr>
-		<c:forEach var="person" items="${personList}">
+		<c:forEach var="employee" items="${employeeList}">
 			<tr>
-				<td>${person.loginId}</td>
-				<td>${person.password}</td>
-				<td>${person.birthDay}</td>
-				<td><input type="button" value="delete" onclick="window.location='person/delete?id=${person.id}'"/></td>
+				<td>${employee.loginId}</td>
+				<td>${employee.password}</td>
+				<td>${employee.birthDay}</td>
+				<td><input type="button" value="delete" onclick="window.location='employee/delete?id=${employee.id}'"/></td>
 			</tr>
 		</c:forEach>
 	</table>	
