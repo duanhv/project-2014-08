@@ -18,7 +18,7 @@ public class EmployeeFormValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		  EmployeeForm employee = (EmployeeForm) target ;
  		  ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name","name.required","Employee Name is required");
-		  ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone","NotEmpty.registration.lastName","Last name must not be Empty.");
+		  ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone","phone","Invalid format, valid formats are 1234567890, 123-456-7890 x1234");
 		  ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email","email.registration.email","Email must not be Empty.");
 		  ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password","password.registration.email","Password must not be Empty.");
 	      String firstName = employee.getName();
