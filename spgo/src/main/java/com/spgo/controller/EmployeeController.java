@@ -34,6 +34,7 @@ public class EmployeeController {
 	public String createEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model, @Valid EmployeeForm employeeForm, BindingResult bindingResult) {
     	employeeValidation.validate(employeeForm, bindingResult);
     	if (bindingResult.hasErrors()) {
+    		model.addAttribute("employeeForm",employeeForm);
 			return "redirect:/guest";
 		} else {
 	    	try {
@@ -46,7 +47,7 @@ public class EmployeeController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	return "redirect:/spgo/employee"; 
+	    	return "redirect:/login"; 
 		}
  
     }
