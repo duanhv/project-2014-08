@@ -18,6 +18,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.spgo.business.EmployeeManager;
+import com.spgo.facade.EmployeeConverter;
 import com.spgo.form.EmployeeForm;
 import com.spgo.form.validation.EmployeeFormValidator;
 import com.spgo.model.bean.EmployeeModel;
@@ -30,6 +31,9 @@ public class EmployeeController {
 	private EmployeeManager employeeManager;
 	@Autowired
 	private EmployeeFormValidator employeeValidation;
+	@Autowired
+	private EmployeeConverter employeeConverter;
+	
 
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
 	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
@@ -39,6 +43,7 @@ public class EmployeeController {
 			return "redirect:/guest";
 		} else {	
 			EmployeeModel employee = new EmployeeModel();
+			employeeConverter.convertFormToModel(employeeForm, employee);			
 	    	try {
 		    	
 		    	if(StringUtils.hasText(employee.getId())) {
