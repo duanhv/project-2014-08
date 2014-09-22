@@ -37,7 +37,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
 	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
-    	employeeValidation.validate(employeeForm, bindingResult);
+//    	employeeValidation.validate(employeeForm, bindingResult);
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
 			return "redirect:/guest";
