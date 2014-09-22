@@ -20,6 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.spgo.business.EmployeeManager;
 import com.spgo.form.EmployeeForm;
 import com.spgo.form.validation.EmployeeFormValidator;
+import com.spgo.model.bean.EmployeeModel;
 import com.spgo.model.web.EmployeeInfo;
    
 @Controller    
@@ -31,14 +32,15 @@ public class EmployeeController {
 	private EmployeeFormValidator employeeValidation;
 
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
-	public String createEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model, @Valid EmployeeForm employeeForm, BindingResult bindingResult) {
+	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
     	employeeValidation.validate(employeeForm, bindingResult);
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
 			return "redirect:/guest";
-		} else {
+		} else {	
+			EmployeeModel employee = new EmployeeModel();
 	    	try {
-		    	employee.setBirthDay(new Date());
+		    	
 		    	if(StringUtils.hasText(employee.getId())) {
 		    		employeeManager.updateEmployee(employee);
 		    	} else {
@@ -79,11 +81,12 @@ public class EmployeeController {
         return "addEmployee";  
     }
     @RequestMapping(value = "/guest/save", method = RequestMethod.POST)  
-	public String createGuest(@ModelAttribute EmployeeInfo employee, ModelMap model ,@Valid EmployeeForm employeeForm, BindingResult bindingResult) {
+	public String createGuest(@ModelAttribute EmployeeForm employeeForm, ModelMap model , BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			logger.info("Returning custSave.jsp page");
 			return "addEmployee";
 		}
+		EmployeeModel employee = new EmployeeModel();
     	try {
 	    	employee.setBirthDay(new Date());
 	    	if(StringUtils.hasText(employee.getId())) {

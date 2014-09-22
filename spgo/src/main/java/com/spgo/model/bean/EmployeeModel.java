@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Employee {
+public class EmployeeModel {
 
 	@Id
 	private String id;
@@ -19,6 +19,24 @@ public class Employee {
 	private Date updatedDate;
 	private String createdBy;
 	private Date createdDate;
+	private String phone;
+	private int age;
+	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	public String getId() {
 		return id;
