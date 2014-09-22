@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.spgo.model.bean.Employee;
+import com.spgo.model.bean.EmployeeModel;
 
 @Repository("employeeDao")
 public class EmployeeDao {
@@ -19,32 +19,32 @@ public class EmployeeDao {
 	
 	public static final String COLLECTION_NAME = "employee";
 
-	public Employee getEmployeeByLoginId(String loginId) {
+	public EmployeeModel getEmployeeByLoginId(String loginId) {
 		String tagName = "loginId";
 		Query query = new Query();
 		query.limit(1);
 		query.addCriteria(Criteria.where(tagName).regex(loginId));
 
-		return mongoTemplate.findOne(query, Employee.class);
+		return mongoTemplate.findOne(query, EmployeeModel.class);
 	}
 	
-	public void addEmployee(Employee employee) {
-		if (!mongoTemplate.collectionExists(Employee.class)) {
-			mongoTemplate.createCollection(Employee.class);
+	public void addEmployee(EmployeeModel employee) {
+		if (!mongoTemplate.collectionExists(EmployeeModel.class)) {
+			mongoTemplate.createCollection(EmployeeModel.class);
 		}		
 		employee.setId(UUID.randomUUID().toString());
 		mongoTemplate.insert(employee, COLLECTION_NAME);
 	}
 
-	public List<Employee> listEmployee() {
-		return mongoTemplate.findAll(Employee.class, COLLECTION_NAME);
+	public List<EmployeeModel> listEmployee() {
+		return mongoTemplate.findAll(EmployeeModel.class, COLLECTION_NAME);
 	}
 	
-	public void deleteEmployee(Employee employee) {
+	public void deleteEmployee(EmployeeModel employee) {
 		mongoTemplate.remove(employee, COLLECTION_NAME);
 	}
 	
-	public void updateEmployee(Employee employee) {
+	public void updateEmployee(EmployeeModel employee) {
 		mongoTemplate.insert(employee, COLLECTION_NAME);		
 	}
 }

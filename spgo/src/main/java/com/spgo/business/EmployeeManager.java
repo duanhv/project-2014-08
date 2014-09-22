@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.spgo.model.bean.Employee;
+import com.spgo.model.bean.EmployeeModel;
 import com.spgo.model.web.EmployeeInfo;
 
 @Service("employeeManager")
@@ -17,7 +17,7 @@ public class EmployeeManager extends BaseManager {
 
 	public EmployeeInfo getEmployeeByLoginId(String loginId) throws Exception {
 		EmployeeInfo info = null;
-		Employee bean = getEmployeeDao().getEmployeeByLoginId(loginId);
+		EmployeeModel bean = getEmployeeDao().getEmployeeByLoginId(loginId);
 		if (bean != null) {
 			info = new EmployeeInfo();
 			BeanUtils.copyProperties(bean, info);
@@ -25,22 +25,18 @@ public class EmployeeManager extends BaseManager {
 		return info;
 	}
 
-	public void addEmployee(EmployeeInfo person) throws Exception {
-		Employee bean = new Employee();
-		BeanUtils.copyProperties(person, bean);
-		// Encrypt Password
-		bean.setPassword(encodeString(bean.getPassword()));
-		getEmployeeDao().addEmployee(bean);
+	public void addEmployee(EmployeeModel employeeModel) throws Exception {
+		getEmployeeDao().addEmployee(employeeModel);
 	}
 	
 	public List<EmployeeInfo> listEmployee() throws Exception {
 		List<EmployeeInfo> listInfo  = null;
 		EmployeeInfo info 		   = null;
-		List<Employee> listBean      = getEmployeeDao().listEmployee();
+		List<EmployeeModel> listBean      = getEmployeeDao().listEmployee();
 		
 		if (listBean != null) {
 			listInfo = new ArrayList<EmployeeInfo>();
-			for (Employee person : listBean) {
+			for (EmployeeModel person : listBean) {
 				info = new EmployeeInfo();
 				BeanUtils.copyProperties(person, info);
 				listInfo.add(info);
@@ -50,14 +46,12 @@ public class EmployeeManager extends BaseManager {
 	}
 	
 	public void deleteEmployee(EmployeeInfo person) throws Exception {
-		Employee bean = new Employee();
+		EmployeeModel bean = new EmployeeModel();
 		BeanUtils.copyProperties(person, bean);
 		getEmployeeDao().deleteEmployee(bean);
 	}
 	
-	public void updateEmployee(EmployeeInfo person) throws Exception {
-		Employee bean = new Employee();
-		BeanUtils.copyProperties(person, bean);
-		getEmployeeDao().updateEmployee(bean);		
+	public void updateEmployee(EmployeeModel employee) throws Exception {		
+		getEmployeeDao().updateEmployee(employee);		
 	}
 }
