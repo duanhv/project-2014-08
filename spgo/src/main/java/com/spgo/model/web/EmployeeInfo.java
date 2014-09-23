@@ -9,7 +9,6 @@ public class EmployeeInfo implements Serializable {
 
 	private String id;
 	private String name;
-	private String loginId;
 	private String email;
 	private String password;
 	private Date birthDay;
@@ -32,14 +31,6 @@ public class EmployeeInfo implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLoginId() {
-		return loginId;
-	}
-
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
 	}
 
 	public String getEmail() {

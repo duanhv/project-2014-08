@@ -54,7 +54,7 @@ public class AppWebUserDetails extends WebUserDetails {
 
 	public String getUsername() {
 		EmployeeInfo details = this.getUser();
-		return (details != null ? details.getLoginId() : null);
+		return (details != null ? details.getEmail() : null);
 	}
 
 	public boolean isAccountNonExpired() {
@@ -83,11 +83,4 @@ public class AppWebUserDetails extends WebUserDetails {
 		return enable;
 	}
 
-	@Override
-	public String getLoginId() {
-
-		EmployeeInfo details = this.getUser();
-		return (details != null ? details.getLoginId() : null);
-
-	}
 }

@@ -2,8 +2,19 @@ package com.spgo.model.bean;
 
 import java.util.Date;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.spgo.form.EmployeeForm.Gender;
+import com.spgo.form.validation.Phone;
 
 @Document
 public class EmployeeModel {
@@ -11,17 +22,17 @@ public class EmployeeModel {
 	@Id
 	private String id;
 	private String name;
-	private String loginId;
 	private String email;
 	private String password;
 	private Date birthDay;
+	private String phone;
+	private int age;
+	
 	private String updatedBy;
 	private Date updatedDate;
 	private String createdBy;
 	private Date createdDate;
-	private String phone;
-	private int age;
-	
+
 	public int getAge() {
 		return age;
 	}
@@ -52,14 +63,6 @@ public class EmployeeModel {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getLoginId() {
-		return loginId;
-	}
-
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
 	}
 
 	public String getEmail() {
