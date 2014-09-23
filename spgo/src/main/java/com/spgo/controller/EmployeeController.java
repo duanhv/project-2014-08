@@ -1,19 +1,22 @@
 package com.spgo.controller;
 
 import java.util.Date;
-
-import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -33,11 +36,10 @@ public class EmployeeController {
 	private EmployeeFormValidator employeeValidation;
 	@Autowired
 	private EmployeeConverter employeeConverter;
-	
 
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
 	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
-//    	employeeValidation.validate(employeeForm, bindingResult);
+
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
 			return "redirect:/guest";
@@ -80,12 +82,12 @@ public class EmployeeController {
     } 
 
     // Guest (allow to add new)
-    @RequestMapping(value = "/guest", method = RequestMethod.GET)  
+    @RequestMapping(value = "/createEmployee", method = RequestMethod.GET)  
 	public String getGuest(ModelMap model) {
     	model.addAttribute("employeeForm",new EmployeeForm());
         return "addEmployee";  
     }
-    @RequestMapping(value = "/guest/save", method = RequestMethod.POST)  
+    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)  
 	public String createGuest(@ModelAttribute EmployeeForm employeeForm, ModelMap model , BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			logger.info("Returning custSave.jsp page");
@@ -105,14 +107,14 @@ public class EmployeeController {
     	return "redirect:/spgo/employee";  
     }
 
-    // Login-Logout
+    // Login
     @RequestMapping(value = "/login", method = RequestMethod.GET)  
 	public String getLogin(ModelMap model) {
         return "login";  
     }
-    
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)  
-	public String getLogout(ModelMap model) {
-        return "logout";  
+
+    @RequestMapping(value = "/default", method = RequestMethod.GET)  
+	public String getDefault(ModelMap model) {
+        return "default";  
     }
 }

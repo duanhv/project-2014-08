@@ -26,7 +26,11 @@ public class EmployeeManager extends BaseManager {
 	}
 
 	public void addEmployee(EmployeeModel employeeModel) throws Exception {
-		getEmployeeDao().addEmployee(employeeModel);
+		
+		if (employeeModel != null) {
+			employeeModel.setPassword(encodeString(employeeModel.getPassword()));
+			getEmployeeDao().addEmployee(employeeModel);
+		}
 	}
 	
 	public List<EmployeeInfo> listEmployee() throws Exception {

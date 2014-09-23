@@ -38,8 +38,9 @@
 	      <td><input name="j_password" type="password" class="txtfield" id="j_password"  tabindex="2"/></td>
 	    </tr>
 	    <tr>
-	      <td colspan="2"><input type="submit" class="btnlogin"  value="Login"/>
+	      <td colspan="1"><input type="submit" class="btnlogin"  value="Login"/>
 	      </td>
+	      <td><a href='<c:url value="createEmployee"/>'>Create new account</a></td>
 	    </tr>
 	  </table>
   </form>

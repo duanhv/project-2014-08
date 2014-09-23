@@ -58,12 +58,6 @@ public abstract class WebUserDetails implements UserDetails {
 	public final Set<String> getAttrKeys() {
 		return attrs.keySet();
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public abstract String getLoginId();
 
     /*
      * (non-Javadoc)

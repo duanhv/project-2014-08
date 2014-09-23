@@ -5,6 +5,7 @@ import com.spgo.model.bean.EmployeeModel;
 
 public class EmployeeConverter {
 	public void convertFormToModel(EmployeeForm employeeForm ,EmployeeModel employeemodel ){
+
 		employeemodel.setEmail(employeeForm.getEmail());
 		employeemodel.setName(employeeForm.getName());
 		employeemodel.setPassword(employeeForm.getPassword());

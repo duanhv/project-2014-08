@@ -36,7 +36,7 @@ public class WebUserDetailsService implements IWebUserDetailsService, Initializi
     		user = new AppWebUserDetails(person, Constants.ROLE_MEMBER);
     		
         } catch (UsernameNotFoundException ufe) {
-        	log.error(ufe.getMessage(), ufe);
+        	//log.error(ufe.getMessage(), ufe);
             throw ufe;
         } catch (Exception e) {
         	log.error(e.getMessage(), e);

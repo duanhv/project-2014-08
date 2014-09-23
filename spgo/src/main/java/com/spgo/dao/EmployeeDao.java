@@ -1,5 +1,6 @@
 package com.spgo.dao;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,22 +18,24 @@ public class EmployeeDao {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
-	public static final String COLLECTION_NAME = "employee";
+	public static final String COLLECTION_NAME = "EmployeeModel";
 
-	public EmployeeModel getEmployeeByLoginId(String loginId) {
-		String tagName = "loginId";
+	public EmployeeModel getEmployeeByLoginId(String email) {
+		String tagName = "email";
 		Query query = new Query();
 		query.limit(1);
-		query.addCriteria(Criteria.where(tagName).regex(loginId));
+		query.addCriteria(Criteria.where(tagName).regex(email));
 
 		return mongoTemplate.findOne(query, EmployeeModel.class);
 	}
 	
 	public void addEmployee(EmployeeModel employee) {
+		employee.setUpdatedDate(new Date());
 		if (!mongoTemplate.collectionExists(EmployeeModel.class)) {
 			mongoTemplate.createCollection(EmployeeModel.class);
 		}		
 		employee.setId(UUID.randomUUID().toString());
+		employee.setCreatedDate(new Date());
 		mongoTemplate.insert(employee, COLLECTION_NAME);
 	}
 
