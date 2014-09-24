@@ -3,13 +3,39 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+
+		$("#employeeForm").validate({
+	        rules: {
+	        	'name'      : { required : true},
+	        	'email'     : { required :true, email : true},
+	        	'password' : { required : true, minlength: 6, maxlength: 20},
+	        	'confirmPassword'   :	{ required : true, minlength: 6, maxlength: 20, equalTo: "#password" }
+	        },
+	        messages: {
+	        	'name'      : { required : "Please enter your name"},
+	        	'email'     : { required : "Please enter email", email : "Email is invalid"},
+	        	'password' : { required : "Please enter password", minlength: "Minimun is 6 characters", maxlength: "Maximun is 20 characters"},
+	        	'confirmPassword'   :	{required : "Please enter password", minlength: "Minimun is 6 characters", maxlength: "Maximun is 20 characters", equalTo: "The confirm password must same with the user password"}
+	        },
+	        submitHandler: function(form) {
+	     		form.submit();  
+	        }
+		});
+ 	
+	}); 
+ 	
+</script>
+
 <h2>Register Employee</h2>
-		<springForm:form method="POST" commandName="employeeForm" action="employee/save">
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="employee/save">
 		<table>
 			<tr>
 				<td>Name:</td>
 				<td><springForm:input path="name" /></td>
-				<td><springForm:errors path="name" cssClass="error" /></td>
+				<td><springForm:errors path="name" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>Email:</td>
@@ -18,12 +44,12 @@
 			</tr>
 			<tr>
 				<td>PassWord:</td>
-				<td><springForm:input path="password" /></td>
+				<td><springForm:password path="password" id="password"/></td>
 				<td><springForm:errors path="password" cssClass="error" /></td>
 			</tr>			
 			<tr>
 				<td>Confirm PassWord:</td>
-				<td><springForm:input path="confirmPassword" /></td>
+				<td><springForm:password path="confirmPassword" /></td>
 				<td><springForm:errors path="confirmPassword" cssClass="error" /></td>
 			</tr>
 			<tr>

@@ -10,7 +10,9 @@ public class EmployeeConverter {
 		employeemodel.setName(employeeForm.getName());
 		employeemodel.setPassword(employeeForm.getPassword());
 		employeemodel.setPhone(employeeForm.getPhone());
-		employeemodel.setAge(Integer.valueOf(employeeForm.getAge()));	
+		if (employeeForm.getAge() != null) {
+			employeemodel.setAge(Integer.valueOf(employeeForm.getAge()));
+		}
 	}
 
 }

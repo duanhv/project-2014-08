@@ -19,7 +19,7 @@
 	<%-- Default JS --%>
 	<tiles:importAttribute name="defaultjs"/>
 	<c:forEach var="item" items="${defaultjs}">
-    	<link rel="stylesheet" href="<c:url value='${item}'/>" type="text/css" media="screen" />
+	   	<script src="<c:url value='${item}'/>" type="text/javascript"></script>
 	</c:forEach>
 
 </head>
