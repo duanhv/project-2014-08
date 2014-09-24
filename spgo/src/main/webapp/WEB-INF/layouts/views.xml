@@ -13,11 +13,7 @@
 	    <put-attribute name="body"	value="/default.jsp" />
 	</definition>
 
-	<definition name="personList" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/jsp/personList.jsp" />
-	</definition>
-	
-	<definition name="addEmployee" extends="DefaultTemplate">
+	<definition name="createEmployee" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/addEmployee.jsp" />
 	</definition>
 

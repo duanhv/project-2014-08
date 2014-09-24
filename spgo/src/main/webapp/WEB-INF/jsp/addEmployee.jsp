@@ -31,56 +31,61 @@
 
 <h2>Register Employee</h2>
 
-<spring:message code="welcome.employee" text="default text" />
 
-		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="employee/save">
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="employee/save" >
 		<table>
 			<tr>
-				<td>Name:</td>
-				<td><springForm:input path="name" tabindex="1"/></td>
+				<th width="20%"></th>
+				<th width="40%"></th>
+				<td width="40%"></td>
+			</tr>
+			<tr>
+				<td>Name:<font color="red">*</font></td>
+				<td><springForm:input path="name" tabindex="1" size="38"/></td>
 				<td><springForm:errors path="name" cssClass="error"/></td>
 			</tr>
 			<tr>
-				<td>Email:</td>
-				<td><springForm:input path="email" tabindex="2"/></td>
+				<td>Email:<font color="red">*</font></td>
+				<td><springForm:input path="email" tabindex="2" size="38"/></td>
 				<td><springForm:errors path="email" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td>PassWord:</td>
-				<td><springForm:password path="password" id="password" tabindex="3"/></td>
+				<td>PassWord:<font color="red">*</font></td>
+				<td><springForm:password path="password" id="password" tabindex="3" size="38"/></td>
 				<td><springForm:errors path="password" cssClass="error" /></td>
 			</tr>			
 			<tr>
-				<td>Confirm PassWord:</td>
-				<td><springForm:password path="confirmPassword" tabindex="4"/></td>
+				<td>Confirm PassWord:<font color="red">*</font></td>
+				<td><springForm:password path="confirmPassword" tabindex="4" size="38"/></td>
 				<td><springForm:errors path="confirmPassword" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Age:</td>
-				<td><springForm:input path="age" tabindex="5"/></td>
+				<td><springForm:input path="age" tabindex="5" size="38"/></td>
 				<td><springForm:errors path="age" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Gender:</td>
 				<td><springForm:select path="gender" tabindex="6">
 						<springForm:option value="" label="Select Gender" />
-						<springForm:option value="MALE" label="Male" />
+						<springForm:option value="MALE" label="Male"/>
 						<springForm:option value="FEMALE" label="Female" />
 					</springForm:select></td>
 				<td><springForm:errors path="gender" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Birthday:</td>
-				<td><springForm:input path="birthday" placeholder="MM/dd/yyyy" tabindex="7"/></td>
+				<td><springForm:input path="birthday" placeholder="dd/MM/yyyy" tabindex="7" size="38"/></td>
 				<td><springForm:errors path="birthday" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><springForm:input path="phone" tabindex="8"/></td>
+				<td><springForm:input path="phone" tabindex="8" size="38"/></td>
 				<td><springForm:errors path="phone" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="Create new Employee" tabindex="9"></td>
+				<td></td>
+				<td colspan="2"><input type="submit" value="Create new Employee" tabindex="9"></td>
 			</tr>
 		</table>
 
