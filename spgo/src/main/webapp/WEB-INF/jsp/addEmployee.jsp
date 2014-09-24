@@ -30,36 +30,39 @@
 </script>
 
 <h2>Register Employee</h2>
+
+<spring:message code="welcome.employee" text="default text" />
+
 		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="employee/save">
 		<table>
 			<tr>
 				<td>Name:</td>
-				<td><springForm:input path="name" /></td>
+				<td><springForm:input path="name" tabindex="1"/></td>
 				<td><springForm:errors path="name" cssClass="error"/></td>
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td><springForm:input path="email" /></td>
+				<td><springForm:input path="email" tabindex="2"/></td>
 				<td><springForm:errors path="email" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>PassWord:</td>
-				<td><springForm:password path="password" id="password"/></td>
+				<td><springForm:password path="password" id="password" tabindex="3"/></td>
 				<td><springForm:errors path="password" cssClass="error" /></td>
 			</tr>			
 			<tr>
 				<td>Confirm PassWord:</td>
-				<td><springForm:password path="confirmPassword" /></td>
+				<td><springForm:password path="confirmPassword" tabindex="4"/></td>
 				<td><springForm:errors path="confirmPassword" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Age:</td>
-				<td><springForm:input path="age" /></td>
+				<td><springForm:input path="age" tabindex="5"/></td>
 				<td><springForm:errors path="age" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Gender:</td>
-				<td><springForm:select path="gender">
+				<td><springForm:select path="gender" tabindex="6">
 						<springForm:option value="" label="Select Gender" />
 						<springForm:option value="MALE" label="Male" />
 						<springForm:option value="FEMALE" label="Female" />
@@ -68,16 +71,16 @@
 			</tr>
 			<tr>
 				<td>Birthday:</td>
-				<td><springForm:input path="birthday" placeholder="MM/dd/yyyy"/></td>
+				<td><springForm:input path="birthday" placeholder="MM/dd/yyyy" tabindex="7"/></td>
 				<td><springForm:errors path="birthday" cssClass="error" /></td>
 			</tr>
 			<tr>
 				<td>Phone:</td>
-				<td><springForm:input path="phone" /></td>
+				<td><springForm:input path="phone" tabindex="8"/></td>
 				<td><springForm:errors path="phone" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="Create new Employee"></td>
+				<td colspan="3"><input type="submit" value="Create new Employee" tabindex="9"></td>
 			</tr>
 		</table>
 

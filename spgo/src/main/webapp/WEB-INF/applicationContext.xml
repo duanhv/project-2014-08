@@ -19,6 +19,10 @@
 	<import resource="dispatcher-servlet.xml" />
 	<import resource="spring-security-config.xml" />	
 	
+	<!-- Register the welcome.properties -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+	</bean>
 
 	<!-- Factory bean that creates the Mongo instance -->
 	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
