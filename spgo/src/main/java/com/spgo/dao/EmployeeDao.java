@@ -24,9 +24,10 @@ public class EmployeeDao {
 		String tagName = "email";
 		Query query = new Query();
 		query.limit(1);
-		query.addCriteria(Criteria.where(tagName).regex(email));
-
-		return mongoTemplate.findOne(query, EmployeeModel.class);
+		query.addCriteria(Criteria.where(tagName).is(email));
+		
+		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME); 
+		return employee;
 	}
 	
 	public void addEmployee(EmployeeModel employee) {

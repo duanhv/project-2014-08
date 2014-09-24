@@ -5,12 +5,14 @@
 
 	<table width="500" align="center" border="1" style="margin-top:20px; margin-bottom:30px;">
 		<tr>
+			<th>Age</th>
 			<th>LoginId</th>
 			<th>Password MD5</th>
 			<th>Birthday</th>
 		</tr>
 		<c:forEach var="employee" items="${employeeList}">
 			<tr>
+				<td>${employee.age}</td>
 				<td>${employee.email}</td>
 				<td>${employee.password}</td>
 				<td>${employee.birthDay}</td>
