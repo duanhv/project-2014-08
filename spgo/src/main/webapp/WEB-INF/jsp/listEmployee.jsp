@@ -5,16 +5,18 @@
 
 	<table width="500" align="center" border="1" style="margin-top:20px; margin-bottom:30px;">
 		<tr>
-			<th>Age</th>
-			<th>LoginId</th>
-			<th>Password MD5</th>
+			<th>Id</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Gender</th>
 			<th>Birthday</th>
 		</tr>
-		<c:forEach var="employee" items="${employeeList}">
+		<c:forEach var="employee" items="${employeeList}" varStatus="status">
 			<tr>
-				<td>${employee.age}</td>
+				<td>${status.index+1}</td>
+				<td>${employee.name}</td>
 				<td>${employee.email}</td>
-				<td>${employee.password}</td>
+				<td>${employee.gender}</td>
 				<td>${employee.birthDay}</td>
 				<td><input type="button" value="delete" onclick="window.location='employee/delete?id=${employee.id}'"/></td>
 			</tr>

@@ -1,6 +1,5 @@
 package com.spgo.controller;
 
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,8 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.View;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.spgo.business.EmployeeManager;
 import com.spgo.facade.EmployeeConverter;
@@ -61,13 +58,13 @@ public class EmployeeController {
     }
         
     @RequestMapping(value = "/employee/delete", method = RequestMethod.GET)  
-	public View deleteEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model) {  
+	public String deleteEmployee(@ModelAttribute EmployeeInfo employee, ModelMap model) {  
 	    try {
 	    	employeeManager.deleteEmployee(employee);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        return new RedirectView("/spgo/employee");  
+        return "redirect:/employee";  
     }
     
     @RequestMapping(value = "/employee", method = RequestMethod.GET)  
@@ -82,32 +79,13 @@ public class EmployeeController {
 
     // Guest (allow to add new)
     @RequestMapping(value = "/createEmployee", method = RequestMethod.GET)  
-	public String getGuest(ModelMap model) {
+	public String createEmployee(ModelMap model) {
     	
     	String message = messageSource.getMessage("welcome.employee", null, new Locale("en"));
     	System.out.println(message);
     	
     	model.addAttribute("employeeForm",new EmployeeForm());
-        return "addEmployee";  
-    }
-    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)  
-	public String createGuest(@ModelAttribute EmployeeForm employeeForm, ModelMap model , BindingResult bindingResult) {
-		if (bindingResult.hasErrors()) {
-			logger.info("Returning custSave.jsp page");
-			return "addEmployee";
-		}
-		EmployeeModel employee = new EmployeeModel();
-    	try {
-	    	employee.setBirthDay(new Date());
-	    	if(StringUtils.hasText(employee.getId())) {
-	    		employeeManager.updateEmployee(employee);
-	    	} else {
-	    		employeeManager.addEmployee(employee);
-	    	}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    	return "redirect:/spgo/employee";  
+        return "createEmployee";  
     }
 
     // Login
