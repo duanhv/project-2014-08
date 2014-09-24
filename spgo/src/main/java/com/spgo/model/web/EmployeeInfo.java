@@ -12,6 +12,7 @@ public class EmployeeInfo implements Serializable {
 	private String email;
 	private String password;
 	private Date birthDay;
+	private int age;
 	private String updatedBy;
 	private Date updatedDate;
 	private String createdBy;
@@ -87,5 +88,13 @@ public class EmployeeInfo implements Serializable {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }
