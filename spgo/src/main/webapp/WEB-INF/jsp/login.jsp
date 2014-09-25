@@ -40,7 +40,7 @@
 	    <tr>
 	      <td colspan="1"><input type="submit" class="btnlogin"  value="Login"/>
 	      </td>
-	      <td><a href='<c:url value="createEmployee"/>'>Create new account</a></td>
+	      <td><a href='<c:url value="employee/save"/>'>Create new account</a></td>
 	    </tr>
 	  </table>
   </form>
