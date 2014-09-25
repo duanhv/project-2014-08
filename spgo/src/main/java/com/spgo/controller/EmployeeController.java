@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,12 +34,23 @@ public class EmployeeController {
 	@Autowired  
     private MessageSource messageSource;
 	
+    // Guest (allow to add new)
+    @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
+	public String createEmployee(ModelMap model) {
+    	
+    	String message = messageSource.getMessage("welcome.employee", null, new Locale("en"));
+    	System.out.println(message);
+    	
+    	model.addAttribute("employeeForm",new EmployeeForm());
+        return "createEmployee";  
+    }
+    
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
 	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
 
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
-			return "redirect:/guest";
+			return "createEmployee";
 		} else {	
 			EmployeeModel employee = new EmployeeModel();
 			employeeConverter.convertFormToModel(employeeForm, employee);			
@@ -75,17 +87,6 @@ public class EmployeeController {
     		e.printStackTrace();
     	}
         return "listEmployee";  
-    } 
-
-    // Guest (allow to add new)
-    @RequestMapping(value = "/createEmployee", method = RequestMethod.GET)  
-	public String createEmployee(ModelMap model) {
-    	
-    	String message = messageSource.getMessage("welcome.employee", null, new Locale("en"));
-    	System.out.println(message);
-    	
-    	model.addAttribute("employeeForm",new EmployeeForm());
-        return "createEmployee";  
     }
 
     // Login
