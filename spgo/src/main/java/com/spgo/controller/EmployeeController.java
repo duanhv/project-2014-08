@@ -6,16 +6,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spgo.business.EmployeeManager;
+import com.spgo.dao.EmployeeDao;
 import com.spgo.facade.EmployeeConverter;
 import com.spgo.form.EmployeeForm;
 import com.spgo.form.validation.EmployeeFormValidator;
@@ -24,6 +25,7 @@ import com.spgo.model.web.EmployeeInfo;
    
 @Controller    
 public class EmployeeController {  
+	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	@Autowired
 	private EmployeeManager employeeManager;
@@ -33,7 +35,8 @@ public class EmployeeController {
 	private EmployeeConverter employeeConverter;
 	@Autowired  
     private MessageSource messageSource;
-	
+	@Autowired
+	private EmployeeDao employeeDao;
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
 	public String createEmployee(ModelMap model) {
@@ -51,7 +54,14 @@ public class EmployeeController {
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
 			return "createEmployee";
-		} else {	
+		} else {
+			String email = employeeForm.getEmail();
+			EmployeeModel em = employeeDao.getEmployeeByLoginId(email);
+			if(em != null ){  
+				String message = messageSource.getMessage("create.employee", null, new Locale("en"));			
+	    		model.addAttribute("userExist",message);
+				return "createEmployee";
+			}
 			EmployeeModel employee = new EmployeeModel();
 			employeeConverter.convertFormToModel(employeeForm, employee);			
 	    	try {
@@ -95,8 +105,8 @@ public class EmployeeController {
         return "login";  
     }
 
-    @RequestMapping(value = "/default", method = RequestMethod.GET)  
+    @RequestMapping(value = "/home", method = RequestMethod.GET)  
 	public String getDefault(ModelMap model) {
-        return "default";  
+        return "homePage";  
     }
 }

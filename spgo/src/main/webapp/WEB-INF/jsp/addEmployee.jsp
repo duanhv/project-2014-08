@@ -28,11 +28,13 @@
 	}); 
  	
 </script>
-
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>Register Employee</h2>
+		<c:if test="${not empty userExist}">
+				<h2 style="color: red">${userExist}</h2> 
+		</c:if>
 
-
-		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="employee/save" >
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="${contextPath}/employee/save" >
 		<table>
 			<tr>
 				<th width="20%"></th>
@@ -47,7 +49,7 @@
 			<tr>
 				<td>Email:<font color="red">*</font></td>
 				<td><springForm:input path="email" tabindex="2" size="38"/></td>
-				<td><springForm:errors path="email" cssClass="error" /></td>
+				<td><springForm:errors path="email" cssClass="error" /></td>				
 			</tr>
 			<tr>
 				<td>PassWord:<font color="red">*</font></td>
@@ -85,7 +87,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td colspan="2"><input type="submit" value="Create new Employee" tabindex="9"></td>
+				<td colspan="2"><input type="submit" value="Create new Account" tabindex="9"></td>
 			</tr>
 		</table>
 

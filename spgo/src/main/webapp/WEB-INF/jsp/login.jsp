@@ -16,7 +16,7 @@
 	  <table width="500" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px; margin-bottom:30px;">
 		<tr>
 			<td colspan="2">
-				Please enter your Login ID and Password
+				Please enter your email and Password
 			</td>
 		</tr>
 	  	<tr>
