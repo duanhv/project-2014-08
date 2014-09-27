@@ -15,16 +15,16 @@
 		  	
 		  	<c:choose>
 			    <c:when test="${webAuth}">
-			       	<a href='<c:url value="/logout"/>'>Log out</a>
+			       	<a href='${contextPath}/logout'>Log out</a>
 			    </c:when>
 			    <c:otherwise>
-			        <a href='<c:url value="/login"/>'>Login</a>
+			        <a href='${contextPath}/login'>Login</a>
 			    </c:otherwise>
 			</c:choose>
 	  	</li>
 	  	<li>
 	  		<c:if test="${empty webAuth}">
-	  			<a href='<c:url value="employee/save"/>' >Create Account</a>
+	  			<a href='${contextPath}/employee/save' >Create Account</a>
 	  		</c:if>
 	  	
 	  	</li>
