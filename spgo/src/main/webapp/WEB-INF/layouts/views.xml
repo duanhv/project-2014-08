@@ -9,8 +9,8 @@
 	    <put-attribute name="body"	value="/WEB-INF/jsp/login.jsp" />
 	</definition>
 
-	<definition name="default" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/default.jsp" />
+	<definition name="homePage" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/homePage.jsp" />
 	</definition>
 
 	<definition name="createEmployee" extends="DefaultTemplate">

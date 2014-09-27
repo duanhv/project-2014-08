@@ -11,5 +11,5 @@
 	</sec:authorize>
 
 	<c:if test="${webAuth}">
-  	 	LoginId:&nbsp;${principal.username}&nbsp;&nbsp;&nbsp;<a href='<c:url value="logout"/>'>Log out</a>
+  	 	Welcome :&nbsp;${principal.username}
   	</c:if>
