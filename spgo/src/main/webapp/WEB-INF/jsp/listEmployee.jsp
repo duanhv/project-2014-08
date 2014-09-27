@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 	<table width="500" align="center" border="1" style="margin-top:20px; margin-bottom:30px;">
 		<tr>
@@ -17,7 +17,9 @@
 				<td>${employee.name}</td>
 				<td>${employee.email}</td>
 				<td>${employee.gender}</td>
-				<td>${employee.birthDay}</td>
+				<td>
+					<fmt:formatDate type="date" value="${employee.birthDay}"/>
+				</td>
 				<td><input type="button" value="delete" onclick="window.location='employee/delete?id=${employee.id}'"/></td>
 			</tr>
 		</c:forEach>
