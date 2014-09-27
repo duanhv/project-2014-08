@@ -2,9 +2,9 @@ package com.spgo.ws.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spgo.ws.business.EmployeeManager;
@@ -17,9 +17,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeManager employeeManager;
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET ,headers="Accept=application/json")
+	@RequestMapping(value = "/getInfo", method = RequestMethod.GET ,headers="Accept=application/json")
 	@ResponseBody
-	public EmployeeInfo getEmployee(@PathVariable String id) {
+	public EmployeeInfo getEmployee(@RequestParam("id") String id) {
 
 		
 		EmployeeInfo info = null;
