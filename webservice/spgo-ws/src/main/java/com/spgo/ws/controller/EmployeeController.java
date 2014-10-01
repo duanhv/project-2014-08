@@ -21,8 +21,6 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeManager employeeManager;
-	@Autowired
-	private EmployeeDao employeeDao;
 	
 	@RequestMapping(value = "/getInfo", method = RequestMethod.GET ,headers="Accept=application/json")
 	@ResponseBody
@@ -42,7 +40,7 @@ public class EmployeeController {
 	 @ResponseStatus( HttpStatus.CREATED )
 	public void addEmployeeFromJson(@RequestBody final EmployeeModel employeeModel){		
 		try{
-			employeeDao.addEmployee(employeeModel);
+			employeeManager.addEmployee(employeeModel);
 		} catch(Exception ex){
 			System.out.println("Can not save new employee");
 		}
