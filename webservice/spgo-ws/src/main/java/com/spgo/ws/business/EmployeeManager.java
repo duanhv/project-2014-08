@@ -21,5 +21,12 @@ public class EmployeeManager extends BaseManager {
 		}
 		return info;
 	}
-
+	
+	public void addEmployee(EmployeeModel employeeModel) throws Exception {
+		
+		if (employeeModel != null) {
+			employeeModel.setPassword(encodeString(employeeModel.getPassword()));
+			getEmployeeDao().addEmployee(employeeModel);
+		}
+	}
 }
