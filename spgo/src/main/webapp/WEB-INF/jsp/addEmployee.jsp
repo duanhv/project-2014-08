@@ -7,6 +7,10 @@
 	
 	$(document).ready(function() {
 
+		$( "#birthday" ).datepicker({
+			dateFormat: 'dd/mm/yy'
+		}); 
+		
 		$("#employeeForm").validate({
 	        rules: {
 	        	'name'      : { required : true},
@@ -52,12 +56,12 @@
 				<td><springForm:errors path="email" cssClass="error" /></td>				
 			</tr>
 			<tr>
-				<td>PassWord:<font color="red">*</font></td>
+				<td>Password:<font color="red">*</font></td>
 				<td><springForm:password path="password" id="password" tabindex="3" size="38"/></td>
 				<td><springForm:errors path="password" cssClass="error" /></td>
 			</tr>			
 			<tr>
-				<td>Confirm PassWord:<font color="red">*</font></td>
+				<td>Confirm Password:<font color="red">*</font></td>
 				<td><springForm:password path="confirmPassword" tabindex="4" size="38"/></td>
 				<td><springForm:errors path="confirmPassword" cssClass="error" /></td>
 			</tr>
@@ -77,7 +81,7 @@
 			</tr>
 			<tr>
 				<td>Birthday:</td>
-				<td><springForm:input path="birthday" placeholder="dd/MM/yyyy" tabindex="7" size="38"/></td>
+				<td><springForm:input path="birthday" placeholder="dd/MM/yyyy" tabindex="7" size="38" id="birthday"/></td>
 				<td><springForm:errors path="birthday" cssClass="error" /></td>
 			</tr>
 			<tr>

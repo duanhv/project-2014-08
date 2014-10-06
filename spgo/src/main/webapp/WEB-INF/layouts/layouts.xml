@@ -11,10 +11,12 @@
 		<put-attribute name="footer" 	value="/WEB-INF/jsp/common/footer.jsp" />
 		
 		<put-list-attribute name="defaultcss">
+			<add-attribute value="/resources/css/jquery-ui.css"/>
 			<add-attribute value="/resources/css/default.css"/>
 		</put-list-attribute>
 		<put-list-attribute name="defaultjs">
 			<add-attribute value="/resources/js/jquery-1.10.2.min.js"/>
+			<add-attribute value="/resources/js/jquery-ui.js"/>
 			<add-attribute value="/resources/js/jquery.validate.min.js"/>
 			<add-attribute value="/resources/js/newJS.js"/>
 		</put-list-attribute>
