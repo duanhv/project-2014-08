@@ -13,5 +13,23 @@
 	   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<bean id="employeeConverter" class="com.spgo.facade.EmployeeConverter"/>
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="emp.portal.sup.xxx@gmail.com" />
+		<property name="password" value="kole20tal80" />
+	 
+		<property name="javaMailProperties">
+		   <props>
+	       	      <prop key="mail.smtp.auth">true</prop>
+	       	      <prop key="mail.smtp.starttls.enable">true</prop>
+	       	   </props>
+		</property>
+	</bean>
+	 
+	<bean id="mailMail" class="com.spgo.common.MailUtil">
+		<property name="mailSender" ref="mailSender" />
+	</bean>
 
 </beans>
