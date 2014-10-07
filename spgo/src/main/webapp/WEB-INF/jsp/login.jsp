@@ -12,7 +12,7 @@
 
   <br />
 
-  <form action="loginProcessing" method="POST" id="loginForm" name="loginForm">
+  <form action="j_spring_security_check" method="POST" id="loginForm" name="loginForm">
 	  <table width="500" align="center" cellpadding="0" cellspacing="0" style="margin-top:20px; margin-bottom:30px;">
 		<tr>
 			<td colspan="2">

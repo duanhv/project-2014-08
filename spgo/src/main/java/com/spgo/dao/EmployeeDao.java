@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
 import com.spgo.model.bean.EmployeeModel;
@@ -29,7 +30,14 @@ public class EmployeeDao {
 		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME); 
 		return employee;
 	}
-	
+	public EmployeeModel getCurrentUser(){
+		String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+    	if("anonymousUser".equals(userName)){
+    		return null;
+    	} else {
+    		return getEmployeeByLoginId(userName);
+    	}		
+	}
 	public void addEmployee(EmployeeModel employee) {
 		employee.setUpdatedDate(new Date());
 		if (!mongoTemplate.collectionExists(EmployeeModel.class)) {
