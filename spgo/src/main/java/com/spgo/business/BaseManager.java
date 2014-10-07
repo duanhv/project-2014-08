@@ -15,6 +15,7 @@ public abstract class BaseManager {
 	}
 	
 	public String encodeString(String str) {
+		//
 		Md5PasswordEncoder encode = new Md5PasswordEncoder();
 		return encode.encodePassword(str, null);
 	}
