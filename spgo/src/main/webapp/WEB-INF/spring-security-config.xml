@@ -3,6 +3,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
   xmlns:security="http://www.springframework.org/schema/security"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:p="http://www.springframework.org/schema/p" 
   xsi:schemaLocation="http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
           http://www.springframework.org/schema/security
@@ -10,14 +11,13 @@
 
 	<security:global-method-security />
 
-	<security:http auto-config="true" disable-url-rewriting="true" use-expressions="true">
+	<security:http auto-config="false" disable-url-rewriting="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
 
 		<!-- Account -->
 		<!-- security:intercept-url pattern="/employee*"   requires-channel="any" access="isAuthenticated()"/-->
 		
 		<!-- Default log in -->
-		<security:form-login login-page="/login" login-processing-url="/loginProcessing" always-use-default-target="true"
-				authentication-failure-url="/login?login_error=true" default-target-url="/employee"/>
+<!-- 		<security:form-login login-page="/login" login-processing-url="/loginProcessing" always-use-default-target="true" authentication-failure-url="/login?login_error=true" default-target-url="/employee"/> -->
 		<!-- Default log out -->
 		<security:logout invalidate-session="true" logout-url="/logout" delete-cookies="JSESSIONID"/>
 		<!-- Maximum session -->
@@ -25,6 +25,9 @@
         	<security:concurrency-control max-sessions="10" error-if-maximum-exceeded="true" expired-url="/login"/>
         </security:session-management>
 
+    
+      
+	<security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
 	</security:http>
 
 	<security:authentication-manager>
@@ -42,4 +45,20 @@
 		<property name="basename" value="classpath:messages" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+	<bean id="customSimpleUrlAuthenticationSuccessHandler" class="com.spgo.security.CustomSimpleUrlAuthenticationSuccessHandler"/>
+	 	<!-- We just actually need to set the default failure url here -->
+ 	<bean id="customAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"
+ 		p:defaultFailureUrl="/login?error=true" />
+	<bean id="authenticationEntryPoint"  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"
+	 	p:loginFormUrl="/login" /> 
+	<!-- Custom authentication manager. In order to authenticate, username and password must not be the same -->
+	<bean id="employeeAuthenticationManager" class="com.spgo.security.EmployeeAuthenticationManager" />
+	
+	 	<bean id="authenticationFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"
+  		p:authenticationManager-ref="employeeAuthenticationManager"
+  		p:authenticationFailureHandler-ref="customAuthenticationFailureHandler"  		
+  		p:authenticationSuccessHandler-ref="customSimpleUrlAuthenticationSuccessHandler"
+  		p:postOnly="false"/>  
+ 		 			
 </beans>

@@ -2,11 +2,17 @@ package com.spgo.controller;
 
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -39,17 +45,15 @@ public class EmployeeController {
 	private EmployeeDao employeeDao;
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
-	public String createEmployee(ModelMap model) {
-    	
+	public String createEmployee(ModelMap model) {    	
     	String message = messageSource.getMessage("welcome.employee", null, new Locale("en"));
-    	System.out.println(message);
-    	
+    	System.out.println(message);    	
     	model.addAttribute("employeeForm",new EmployeeForm());
         return "createEmployee";  
     }
     
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
-	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult) {
+	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult ,HttpServletRequest request) {
 
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
@@ -74,7 +78,9 @@ public class EmployeeController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	return "redirect:/login"; 
+	    	employee = employeeDao.getEmployeeByLoginId(employee.getEmail());
+	    	autoLogin(employee,request);	    	
+	    	return "redirect:/home"; 
 		}
  
     }
@@ -108,5 +114,12 @@ public class EmployeeController {
     @RequestMapping(value = "/home", method = RequestMethod.GET)  
 	public String getDefault(ModelMap model) {
         return "homePage";  
+    }
+    private void autoLogin(EmployeeModel employeeModel ,HttpServletRequest request){
+    	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(employeeModel.getEmail(), employeeModel.getPassword());
+    	request.getSession();
+    	token.setDetails(new WebAuthenticationDetails(request));
+//    	Authentication authenticatedUser = userAuthenticationManager.authenticate(token);  
+  	    SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
     }
 }

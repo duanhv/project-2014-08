@@ -4,12 +4,11 @@
 
 <h1><a href="#">Portal Page</a></h1>
 <p><a href="http://saigontechnology.vn/">Spring 4 + Mongodb</a></p>
-
 	<sec:authentication var="principal" property="principal" />
 	<sec:authorize access="isAuthenticated()" >
 		<c:set var="webAuth" value="true"/>
 	</sec:authorize>
 
 	<c:if test="${webAuth}">
-  	 	Welcome :&nbsp;${principal.username}
+  	 	     Welcome :  ${principal}
   	</c:if>

@@ -2,7 +2,6 @@ package com.spgo.business;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -57,5 +56,5 @@ public class EmployeeManager extends BaseManager {
 	
 	public void updateEmployee(EmployeeModel employee) throws Exception {		
 		getEmployeeDao().updateEmployee(employee);		
-	}
+	}	
 }
