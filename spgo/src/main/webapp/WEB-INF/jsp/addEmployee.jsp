@@ -34,11 +34,8 @@
 </script>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <h2>Register Employee</h2>
-		<c:if test="${not empty userExist}">
-				<h2 style="color: red">${userExist}</h2> 
-		</c:if>
 
-		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="${contextPath}/employee/save" >
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="save" >
 		<table>
 			<tr>
 				<th width="20%"></th>
