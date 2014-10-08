@@ -28,8 +28,7 @@ public class EmployeeForm {
     @NotNull
     private Gender gender;
      
-    @DateTimeFormat(pattern="MM/dd/yyyy")
-    @NotNull @Past
+
     private Date birthday;
     
     @Phone

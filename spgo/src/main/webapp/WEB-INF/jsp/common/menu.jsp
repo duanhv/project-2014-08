@@ -8,9 +8,12 @@
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 	<ul>
 		<li class="current_page_item"><a href="${contextPath}">Home</a></li>
-		<li><a href="#">Blog</a></li>
-		<li><a href="#">Photos</a></li>		
-		<li><a href="#">Contact</a></li>
+	  	<li>
+	  		<c:if test="${not empty webAuth}">
+	  			<a href='${contextPath}/employee/details' >Employee Details</a>
+	  		</c:if>
+	  	
+	  	</li>
 		<li>
 		  	
 		  	<c:choose>

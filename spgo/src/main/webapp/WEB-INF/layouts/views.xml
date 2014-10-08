@@ -20,5 +20,7 @@
 	<definition name="listEmployee" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/listEmployee.jsp" />
 	</definition>
-	
+	<definition name="employeeDetails" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/jsp/employee/employeeDetails.jsp" />
+	</definition>
 </tiles-definitions>
