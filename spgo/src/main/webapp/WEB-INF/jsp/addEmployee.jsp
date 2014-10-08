@@ -7,9 +7,7 @@
 	
 	$(document).ready(function() {
 
-		$( "#birthday" ).datepicker({
-			dateFormat: 'dd/mm/yy'
-		}); 
+
 		
 		$("#employeeForm").validate({
 	        rules: {
@@ -29,6 +27,10 @@
 	        }
 		});
  	
+	    $('#picker').dropdate({
+	        dateFormat:'mm/dd/yyyy'
+	    });
+		
 	}); 
  	
 </script>
@@ -78,7 +80,7 @@
 			</tr>
 			<tr>
 				<td>Birthday:</td>
-				<td><springForm:input path="birthday" placeholder="dd/MM/yyyy" tabindex="7" size="38" id="birthday"/></td>
+				<td><springForm:input path="birthday"  id="picker"/></td>
 				<td><springForm:errors path="birthday" cssClass="error" /></td>
 			</tr>
 			<tr>

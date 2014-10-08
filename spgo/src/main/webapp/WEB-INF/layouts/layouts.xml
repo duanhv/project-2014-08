@@ -19,6 +19,8 @@
 			<add-attribute value="/resources/js/jquery-ui.js"/>
 			<add-attribute value="/resources/js/jquery.validate.min.js"/>
 			<add-attribute value="/resources/js/newJS.js"/>
+			<add-attribute value="/resources/js/date.format.js"/> 
+			<add-attribute value="/resources/js/jquery-dropdate.js"/>
 		</put-list-attribute>
 	</definition>
 	
