@@ -46,6 +46,7 @@ public class EmployeeController {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private EmployeeAuthenticationManager employeeAuthenticationManager;
+
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
 	public String createEmployee(ModelMap model) {    	
@@ -82,7 +83,7 @@ public class EmployeeController {
 				e.printStackTrace();
 			}
 	    	employee = employeeDao.getEmployeeByLoginId(employee.getEmail());
-	    	autoLogin(employee,request);	    	
+//	    	autoLogin(employee,request);	    	
 	    	return "redirect:/home"; 
 		}
  
@@ -125,4 +126,13 @@ public class EmployeeController {
     	Authentication authenticatedUser = employeeAuthenticationManager.authenticate(token);  
   	    SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
+    @RequestMapping(value = "/employee/details", method = RequestMethod.GET)  
+	public String employeeDetails(ModelMap model) {  
+    	EmployeeModel em =  employeeDao.getCurrentUser();
+    	EmployeeForm form = new EmployeeForm();
+    	employeeConverter.convertModelToForm(em,form);
+    	model.addAttribute("employee", form);
+        return "employeeDetails"; 
+    }
+    
 }

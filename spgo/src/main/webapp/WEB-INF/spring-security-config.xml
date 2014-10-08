@@ -12,7 +12,7 @@
 	<security:global-method-security />
 
 	<security:http auto-config="false" disable-url-rewriting="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
-
+		<security:intercept-url pattern="/employee/details" access="isAuthenticated()" />
 		<!-- Account -->
 		<!-- security:intercept-url pattern="/employee*"   requires-channel="any" access="isAuthenticated()"/-->
 		

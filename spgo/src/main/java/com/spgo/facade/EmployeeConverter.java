@@ -18,5 +18,20 @@ public class EmployeeConverter {
 		}
 		employeemodel.setBirthDay(employeeForm.getBirthday());
 	}
+	
+	public void convertModelToForm(EmployeeModel employeemodel ,EmployeeForm employeeForm ){
+		employeeForm.setName(employeeForm.getName());
+		employeeForm.setEmail(employeeForm.getEmail());
+		employeeForm.setPassword(employeeForm.getPassword());
+		employeeForm.setPhone(employeeForm.getPhone());
+		if (employeemodel.getAge() > 0) {
+			employeemodel.setAge(Integer.valueOf(employeeForm.getAge()));
+		}
+		if (employeemodel.getGender() != null) {
+//			employeeForm.setGender(employeemodel.getGender());
+		}
+		employeeForm.setBirthday(employeeForm.getBirthday());
+		
+	}
 
-}
+}	
