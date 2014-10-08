@@ -28,6 +28,7 @@ import com.spgo.form.EmployeeForm;
 import com.spgo.form.validation.EmployeeFormValidator;
 import com.spgo.model.bean.EmployeeModel;
 import com.spgo.model.web.EmployeeInfo;
+import com.spgo.security.EmployeeAuthenticationManager;
    
 @Controller    
 public class EmployeeController {  
@@ -43,6 +44,8 @@ public class EmployeeController {
     private MessageSource messageSource;
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private EmployeeAuthenticationManager employeeAuthenticationManager;
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
 	public String createEmployee(ModelMap model) {    	
@@ -119,7 +122,7 @@ public class EmployeeController {
     	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(employeeModel.getEmail(), employeeModel.getPassword());
     	request.getSession();
     	token.setDetails(new WebAuthenticationDetails(request));
-//    	Authentication authenticatedUser = userAuthenticationManager.authenticate(token);  
-  	    SecurityContextHolder.getContext().getAuthentication().setAuthenticated(true);
+    	Authentication authenticatedUser = employeeAuthenticationManager.authenticate(token);  
+  	    SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
     }
 }
