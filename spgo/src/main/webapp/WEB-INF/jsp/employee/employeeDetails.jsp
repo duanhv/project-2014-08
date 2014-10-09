@@ -37,10 +37,13 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <div id="content">
-
-
-
-
+	<div id="imageframe">
+		<h1> day hien thi hinh anh</h1>
+	</div>
+	<div id="detailsframe">
+	
+		<h1> day hien thi details</h1>
+	</div>
 
 </div>
 

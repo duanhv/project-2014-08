@@ -25,12 +25,15 @@ public class EmployeeConverter {
 		employeeForm.setPassword(employeeForm.getPassword());
 		employeeForm.setPhone(employeeForm.getPhone());
 		if (employeemodel.getAge() > 0) {
-			employeemodel.setAge(Integer.valueOf(employeeForm.getAge()));
+			employeeForm.setAge(Integer.valueOf(employeemodel.getAge()));
 		}
 		if (employeemodel.getGender() != null) {
 //			employeeForm.setGender(employeemodel.getGender());
 		}
-		employeeForm.setBirthday(employeeForm.getBirthday());
+		if(employeemodel.getBirthDay() != null){
+			employeeForm.setBirthday(employeemodel.getBirthDay());
+		}
+		
 		
 	}
 
