@@ -13,6 +13,7 @@
 		<put-list-attribute name="defaultcss">
 			<add-attribute value="/resources/css/jquery-ui.css"/>
 			<add-attribute value="/resources/css/default.css"/>
+			<add-attribute value="/resources/css/employeeDetails.css"/>
 		</put-list-attribute>
 		<put-list-attribute name="defaultjs">
 			<add-attribute value="/resources/js/jquery-1.10.2.min.js"/>

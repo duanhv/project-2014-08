@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+#content{
+	width:800px;
+	background: red;
+	height: 300px;	
+}
+
+#content div#imageframe {
+	
+	width:300px;
+	float:left;
+}
+
+#content div#detailsframe {	
+	width:480px;
+	float:right;
+}
