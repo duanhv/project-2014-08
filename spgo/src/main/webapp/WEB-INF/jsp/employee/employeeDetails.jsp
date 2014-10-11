@@ -6,8 +6,6 @@
 <script type="text/javascript">
 	
 	$(document).ready(function() {
-
-
 		
 		$("#employeeForm").validate({
 	        rules: {
@@ -38,13 +36,36 @@
 
 <div id="content">
 	<div id="imageframe">
-		<h1> day hien thi hinh anh</h1>
 	</div>
 	<div id="detailsframe">
-	
-		<h1> day hien thi details</h1>
 	</div>
-
+	<table>
+		<tr>
+			<td>${employee.name}</td>
+		</tr>
+		<tr>
+			<td>${employee.email}</td>
+		</tr>
+		<tr>
+			<td>${employee.gender}</td>
+		</tr>
+		<tr>
+			<td><fmt:formatDate type="date" value="${employee.birthday}"/></td>
+		</tr>
+		<tr>
+			<td>
+				<form method="POST" action="uploadFile" enctype="multipart/form-data">
+			        File to upload: <input type="file" name="file"><br />
+			        <input type="submit" value="Upload"> Press here to upload the picture!
+			    </form>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
+			</td>
+		</tr>
+	</table>
 </div>
 
 
