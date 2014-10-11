@@ -28,7 +28,7 @@
 		</property>
 	</bean>
 	 
-	<bean id="mailMail" class="com.spgo.common.MailUtil">
+	<bean id="mailUtil" class="com.spgo.common.MailUtil">
 		<property name="mailSender" ref="mailSender" />
 	</bean>
 

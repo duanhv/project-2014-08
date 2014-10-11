@@ -2,11 +2,14 @@ package com.spgo.business;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.spgo.common.EncryptionHelper;
 import com.spgo.model.bean.EmployeeModel;
 import com.spgo.model.web.EmployeeInfo;
 
@@ -57,4 +60,28 @@ public class EmployeeManager extends BaseManager {
 	public void updateEmployee(EmployeeModel employee) throws Exception {		
 		getEmployeeDao().updateEmployee(employee);		
 	}	
+	
+	public void sendActiveEmail(String name, String email, String subject, String content) {
+		try {
+			String from = "support@gmail.com";
+			String to   = email;
+			
+			if (StringUtils.isNotBlank(content)) {
+				
+				String encEmail = EncryptionHelper.encodeURL(EncryptionHelper.encrypt(email));
+				
+				content = content.replace("#name#", name);
+				content = content.replace("#email#", encEmail);
+				
+				getMailUtil().sendMail(from, to, subject, content);				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void activeEmployeeByEmail(String email) {
+		getEmployeeDao().activeEmployeeByEmail(email);
+	}
 }

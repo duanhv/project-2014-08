@@ -3,6 +3,10 @@ package com.spgo.model.web;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.spgo.common.Constants;
+
 public class EmployeeInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,6 +18,7 @@ public class EmployeeInfo implements Serializable {
 	private Date birthDay;
 	private int age;
 	private String gender;
+	private String active;
 	private String updatedBy;
 	private Date updatedDate;
 	private String createdBy;
@@ -105,5 +110,16 @@ public class EmployeeInfo implements Serializable {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getActive() {
+		if (StringUtils.isBlank(active)) {
+			return Constants.NO;
+		}
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 }
