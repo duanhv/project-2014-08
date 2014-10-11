@@ -9,6 +9,7 @@
 			<th>Name</th>
 			<th>Email</th>
 			<th>Gender</th>
+			<th>Active</th>
 			<th>Birthday</th>
 		</tr>
 		<c:forEach var="employee" items="${employeeList}" varStatus="status">
@@ -17,6 +18,7 @@
 				<td>${employee.name}</td>
 				<td>${employee.email}</td>
 				<td>${employee.gender}</td>
+				<td>${employee.active}</td>
 				<td>
 					<fmt:formatDate type="date" value="${employee.birthDay}"/>
 				</td>

@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,8 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spgo.business.EmployeeManager;
+import com.spgo.common.Constants;
+import com.spgo.common.EncryptionHelper;
 import com.spgo.dao.EmployeeDao;
 import com.spgo.facade.EmployeeConverter;
 import com.spgo.form.EmployeeForm;
@@ -49,7 +51,7 @@ public class EmployeeController {
 
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
-	public String createEmployee(ModelMap model) {    	
+	public String createEmployee(ModelMap model) { 
     	String message = messageSource.getMessage("welcome.employee", null, new Locale("en"));
     	System.out.println(message);    	
     	model.addAttribute("employeeForm",new EmployeeForm());
@@ -77,13 +79,19 @@ public class EmployeeController {
 		    	if(StringUtils.hasText(employee.getId())) {
 		    		employeeManager.updateEmployee(employee);
 		    	} else {
+		    		employee.setActive(Constants.NO);
 		    		employeeManager.addEmployee(employee);
 		    	}
+		    	
+		    	// send email active
+		    	String subject 		= messageSource.getMessage("active.subject", null, new Locale("en"));
+		    	String content 		= messageSource.getMessage("active.content", null, new Locale("en"));
+		    	
+		    	employeeManager.sendActiveEmail(employee.getName(), employee.getEmail(), subject, content);
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	employee = employeeDao.getEmployeeByLoginId(employee.getEmail());
-//	    	autoLogin(employee,request);	    	
 	    	return "redirect:/home"; 
 		}
  
@@ -114,7 +122,7 @@ public class EmployeeController {
 	public String getLogin(ModelMap model) {
         return "login";  
     }
-
+  
     @RequestMapping(value = "/home", method = RequestMethod.GET)  
 	public String getDefault(ModelMap model) {
         return "homePage";  
@@ -133,6 +141,26 @@ public class EmployeeController {
     	employeeConverter.convertModelToForm(em,form);
     	model.addAttribute("employee", form);
         return "employeeDetails"; 
+    }
+    
+    @RequestMapping(value = "/employee/active", method = RequestMethod.GET)  
+	public String activeEmployee(@RequestParam String id, HttpServletRequest request) {    	
+
+    	try {
+    		System.out.println("id Before = " + id);
+    		String email = EncryptionHelper.decrypt(id);
+    		System.out.println("id After  = " + email);
+
+    		employeeManager.activeEmployeeByEmail(email);
+    		
+    		EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
+	    	autoLogin(employee, request);	    	
+
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+        return "redirect:/home";  
     }
     
 }
