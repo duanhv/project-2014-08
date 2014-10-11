@@ -5,37 +5,39 @@ import java.util.Date;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import org.apache.catalina.deploy.ContextHandler;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import com.spgo.common.ContextHelper;
 import com.spgo.form.validation.Phone;
 
 
 public class EmployeeForm {
+
 	@Size(min=2, max=30) 
     private String name;
-     
+
     @NotEmpty @Email
     private String email;
-     
+
     @NotNull @Min(18) @Max(100)
     private Integer age;
-     
+
     @NotNull
     private Gender gender;
-     
+    private String active;
+    private String profileImage;
+    private Date birthday;    
 
-    private Date birthday;
-    
     @Phone
     private String phone;
-    
+
     @NotNull
 	private String password;
+
     @NotNull
    	private String confirmPassword;
     
@@ -105,5 +107,21 @@ public class EmployeeForm {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 }

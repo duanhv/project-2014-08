@@ -1,9 +1,13 @@
 package com.spgo.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +18,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.spgo.business.EmployeeManager;
 import com.spgo.common.Constants;
+import com.spgo.common.ContextHelper;
 import com.spgo.common.EncryptionHelper;
 import com.spgo.dao.EmployeeDao;
 import com.spgo.facade.EmployeeConverter;
@@ -59,7 +65,7 @@ public class EmployeeController {
     }
     
     @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
-	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult ,HttpServletRequest request) {
+	public String createEmployee(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) {
 
     	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
@@ -76,7 +82,7 @@ public class EmployeeController {
 			employeeConverter.convertFormToModel(employeeForm, employee);			
 	    	try {
 		    	
-		    	if(StringUtils.hasText(employee.getId())) {
+		    	if(StringUtils.isNotBlank(employee.getId())) {
 		    		employeeManager.updateEmployee(employee);
 		    	} else {
 		    		employee.setActive(Constants.NO);
@@ -163,4 +169,52 @@ public class EmployeeController {
         return "redirect:/home";  
     }
     
+    /**
+     * Upload single file using Spring Controller
+     */
+    @RequestMapping(value = "/employee/uploadFile", method = RequestMethod.POST)
+    public String uploadFileHandler(@RequestParam("file") MultipartFile file, HttpServletRequest request, ModelMap model) {
+ 
+        if (file != null && !file.isEmpty()) {
+            try {
+            	
+            	String currentEmail = ContextHelper.getLoginId();
+            	if (StringUtils.isNotBlank(currentEmail)) {
+	                byte[] bytes = file.getBytes();
+	                
+	                String oriFileName = file.getOriginalFilename();
+	                String extFile     = oriFileName.substring(oriFileName.indexOf(".") , oriFileName.length());
+	                String name = ContextHelper.getFileNameFromEmail(currentEmail) + extFile;
+	                
+	                String rootPath = request.getRealPath("/");
+	                System.out.println("rootPath: " + rootPath);
+	                
+	                File dir = new File(rootPath + File.separator + "resources" + File.separator +"mytheme" + File.separator + "uploadprofile");
+	 
+	                // Create the file on server
+	                File serverFile = new File(dir.getAbsolutePath() + File.separator + name);
+	                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+	                stream.write(bytes);
+	                stream.close();
+
+	                logger.info("Server File Location=" + serverFile.getAbsolutePath());
+	                logger.info("You successfully uploaded file=" + name);
+	                
+	                employeeDao.updateProfileImage(currentEmail, name);
+            	}
+
+            } catch (Exception e) {
+            	e.printStackTrace();
+            } finally {
+            	EmployeeModel em =  employeeDao.getCurrentUser();
+            	EmployeeForm form = new EmployeeForm();
+            	employeeConverter.convertModelToForm(em,form);
+            	model.addAttribute("employee", form);
+            }
+            
+        } else {
+            logger.info("You failed to upload, because the file was empty.");
+        }
+        return "employeeDetails";
+    }
 }

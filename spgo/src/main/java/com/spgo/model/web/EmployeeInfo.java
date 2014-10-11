@@ -19,6 +19,8 @@ public class EmployeeInfo implements Serializable {
 	private int age;
 	private String gender;
 	private String active;
+	private String profileImage;
+	
 	private String updatedBy;
 	private Date updatedDate;
 	private String createdBy;
@@ -121,5 +123,13 @@ public class EmployeeInfo implements Serializable {
 
 	public void setActive(String active) {
 		this.active = active;
+	}
+
+	public String getProfileImage() {
+		return profileImage;
+	}
+
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 }

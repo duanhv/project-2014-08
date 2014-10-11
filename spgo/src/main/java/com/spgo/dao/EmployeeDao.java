@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Repository;
 
@@ -32,14 +31,20 @@ public class EmployeeDao {
 		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME); 
 		return employee;
 	}
-	public EmployeeModel getCurrentUser(){
-		String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-    	if("anonymousUser".equals(userName)){
-    		return null;
-    	} else {
-    		return getEmployeeByLoginId(userName);
-    	}		
+
+	public EmployeeModel getCurrentUser() { 
+		try {
+			String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+	    	if("anonymousUser".equals(userName)){
+	    		return null;
+	    	} else {
+	    		return getEmployeeByLoginId(userName);
+	    	}
+		} catch (Exception e) {
+			return null;
+		}
 	}
+
 	public void addEmployee(EmployeeModel employee) {
 		employee.setUpdatedDate(new Date());
 		if (!mongoTemplate.collectionExists(EmployeeModel.class)) {
@@ -66,13 +71,25 @@ public class EmployeeDao {
 		String tagName = "email";
 		Query query = new Query();
 		query.addCriteria(Criteria.where(tagName).is(email));
-		//query.fields().include("email");
-		
 		
 		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME);
 		System.out.println("employee - " + employee);
 
 		employee.setActive(Constants.YES);
+		
+		mongoTemplate.save(employee, COLLECTION_NAME);
+		
+	}
+	
+	public void updateProfileImage(String email, String profileImage) {
+		String tagName = "email";
+		Query query = new Query();
+		query.addCriteria(Criteria.where(tagName).is(email));
+		
+		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME);
+		System.out.println("employee - " + employee);
+
+		employee.setProfileImage(profileImage);
 		
 		mongoTemplate.save(employee, COLLECTION_NAME);
 		
