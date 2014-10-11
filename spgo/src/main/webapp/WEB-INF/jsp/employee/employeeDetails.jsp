@@ -62,7 +62,7 @@
 		</tr>
 		<tr>
 			<td>
-				<img src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
+				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
 			</td>
 		</tr>
 	</table>
