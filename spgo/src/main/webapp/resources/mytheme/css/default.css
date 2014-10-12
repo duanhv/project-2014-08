@@ -146,11 +146,11 @@ img {
 
 /* Content */
 
-#content {
-	float: left;
-	width: 530px;
-	background: url(../images/img03.gif) no-repeat;
-}
+/* #content { */
+/* 	float: left; */
+/* 	width: 530px; */
+/* 	background: url(../images/img03.gif) no-repeat; */
+/* } */
 
 .post {
 	padding: 40px 40px 0 40px;

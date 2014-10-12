@@ -36,10 +36,18 @@
 
 <div id="content">
 	<div id="imageframe">
+			<h6> to add image</h6>
+				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
+
+				<form method="POST" action="uploadFile" enctype="multipart/form-data">
+			        File to upload: <input type="file" name="file"><br />
+			        <input type="submit" value="Upload"> Press here to upload the picture!
+			    </form>
+			
+		
 	</div>
 	<div id="detailsframe">
-	</div>
-	<table>
+		<table>
 		<tr>
 			<td>${employee.name}</td>
 		</tr>
@@ -52,20 +60,10 @@
 		<tr>
 			<td><fmt:formatDate type="date" value="${employee.birthday}"/></td>
 		</tr>
-		<tr>
-			<td>
-				<form method="POST" action="uploadFile" enctype="multipart/form-data">
-			        File to upload: <input type="file" name="file"><br />
-			        <input type="submit" value="Upload"> Press here to upload the picture!
-			    </form>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
-			</td>
-		</tr>
-	</table>
+
+	</table>	
+	</div>
+
 </div>
 
 
