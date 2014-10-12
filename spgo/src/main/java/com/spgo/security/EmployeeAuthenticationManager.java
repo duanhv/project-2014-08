@@ -26,8 +26,7 @@ public class EmployeeAuthenticationManager  implements AuthenticationManager{
 	
 	@Autowired
 	private Md5PasswordEncoder passwordEncoder;
-	
-	@Override
+
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		try {
 			EmployeeModel em = employeeDao.getEmployeeByLoginId((String) authentication.getName());
