@@ -53,7 +53,7 @@
 	<div id="detailsframe">
 	
 		<h6>Employee Details </h6>
-		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="save" >
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="update" >
 		<table>
 			<tr>
 				<th width="20%"></th>
