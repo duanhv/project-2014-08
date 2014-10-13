@@ -9,9 +9,12 @@
 	
 	width:300px;
 	float:left;
+	border-color: 1px solid red;
 }
 
 #content div#detailsframe {	
 	width:480px;
 	float:right;
+	border-color: 1px solid red;
 }
+
