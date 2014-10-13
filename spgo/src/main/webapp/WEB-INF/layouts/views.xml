@@ -23,4 +23,8 @@
 	<definition name="employeeDetails" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/employee/employeeDetails.jsp" />
 	</definition>
+	<definition name="editEmployee" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/jsp/employee/editEmployeeDetails.jsp" />
+	</definition>
+	
 </tiles-definitions>

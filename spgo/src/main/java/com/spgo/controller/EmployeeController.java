@@ -149,6 +149,14 @@ public class EmployeeController {
         return "employeeDetails"; 
     }
     
+    @RequestMapping(value = "/employee/edit", method = RequestMethod.GET)  
+	public String editEmployeeDetails(@RequestParam("email") String email ,ModelMap model) {  
+    	EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
+    	EmployeeForm form = new EmployeeForm();
+    	employeeConverter.convertModelToForm(employee,form);
+    	model.addAttribute("employee", form);
+        return "editEmployee";
+    }    
     @RequestMapping(value = "/employee/active", method = RequestMethod.GET)  
 	public String activeEmployee(@RequestParam String id, HttpServletRequest request) {    	
 
