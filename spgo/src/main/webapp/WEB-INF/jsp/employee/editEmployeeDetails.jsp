@@ -39,7 +39,7 @@
 <div id="content">
 	<div id="imageframe">
 			
-				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
+				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employeeForm.profileImage}" /> 
 
 				<form method="POST" action="uploadFile" enctype="multipart/form-data">
 			        File to upload: <input type="file" name="file"><br />
