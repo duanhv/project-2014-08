@@ -178,7 +178,7 @@ public class EmployeeController {
     	
         return "redirect:/home";  
     }
-    @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
+    @RequestMapping(value = "/employee/update", method = RequestMethod.POST)  
 	public String saveEmployeeDetails(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) { 
       	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
