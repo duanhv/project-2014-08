@@ -1,5 +1,7 @@
 package com.spgo.facade;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.spgo.form.EmployeeForm;
 import com.spgo.form.EmployeeForm.Gender;
 import com.spgo.model.bean.EmployeeModel;
@@ -10,17 +12,27 @@ public class EmployeeConverter {
 
 		employeemodel.setName(employeeForm.getName());
 		employeemodel.setEmail(employeeForm.getEmail());
-		employeemodel.setPassword(employeeForm.getPassword());
+		if(StringUtils.isNotBlank(employeeForm.getPassword())){
+			employeemodel.setPassword(employeeForm.getPassword());
+		}
+		if(StringUtils.isNotBlank(employeeForm.getActive())){
+			employeemodel.setActive(employeeForm.getActive());
+		}
 		employeemodel.setPhone(employeeForm.getPhone());
-		employeemodel.setActive(employeeForm.getActive());
-		employeemodel.setProfileImage(employeeForm.getProfileImage());
+		if(StringUtils.isNotBlank(employeeForm.getProfileImage())){
+			employeemodel.setProfileImage(employeeForm.getProfileImage());
+		}
+		
 		if (employeeForm.getAge() != null) {
 			employeemodel.setAge(Integer.valueOf(employeeForm.getAge()));
 		}
 		if (employeeForm.getGender() != null) {
 			employeemodel.setGender(employeeForm.getGender().name());
 		}
-		employeemodel.setBirthDay(employeeForm.getBirthday());
+		if(employeeForm.getBirthday() != null){
+			employeemodel.setBirthDay(employeeForm.getBirthday());
+		}
+		
 	}
 	
 	public void convertModelToForm(EmployeeModel employeemodel ,EmployeeForm employeeForm ) {

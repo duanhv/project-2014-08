@@ -67,7 +67,8 @@
 			</tr>
 			<tr>
 				<td>Email:</td>
-				<td id="email">${employeeForm.email}</td>							
+				<td id="email">${employeeForm.email}</td>	
+				<td style="display: none;"><springForm:input path="email" tabindex="1" size="38"/></td>						
 			</tr>
 
 			<tr>
