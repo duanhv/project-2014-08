@@ -38,7 +38,7 @@
 
 <div id="content">
 	<div id="imageframe">
-			<h6> to add image</h6>
+			
 				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
 
 				<form method="POST" action="uploadFile" enctype="multipart/form-data">
@@ -47,30 +47,60 @@
 			    </form>
 			    <br/>
 			    
-				<input type="submit" class="btnEdit"  value="Edit Profile" />			
+					
 		
 	</div>
 	<div id="detailsframe">
+	
 		<h6>Employee Details </h6>
-		<table >
-		<tr>
-			<td> Name : </td>
-			<td >${employee.name}</td>
-		</tr>
-		<tr>
-			<td> Email : </td>
-			<td id="email">${employee.email}</td>
-		</tr>
-		<tr>
-			<td> Gender : </td>
-			<td>${employee.gender}</td>
-		</tr>
-		<tr>
-			<td> Birth Day : </td>
-			<td><fmt:formatDate type="date" value="${employee.birthday}"/></td>
-		</tr>
+		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="save" >
+		<table>
+			<tr>
+				<th width="20%"></th>
+				<th width="40%"></th>
+				<td width="40%"></td>
+			</tr>
+			<tr>
+				<td>Name: </td>
+				<td><springForm:input path="name" tabindex="1" size="38"/></td>
+				<td><springForm:errors path="name" cssClass="error"/></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td id="email">${employeeForm.email}</td>							
+			</tr>
 
-	</table>	
+			<tr>
+				<td>Age:</td>
+				<td><springForm:input path="age" tabindex="5" size="38"/></td>
+				<td><springForm:errors path="age" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>Gender:</td>
+				<td><springForm:select path="gender" tabindex="6">
+						<springForm:option value="" label="Select Gender" />
+						<springForm:option value="MALE" label="Male"/>
+						<springForm:option value="FEMALE" label="Female" />
+					</springForm:select></td>
+				<td><springForm:errors path="gender" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>Birthday:</td>
+				<td><springForm:input path="birthday"  id="picker"/></td>
+				<td><springForm:errors path="birthday" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><springForm:input path="phone" tabindex="8" size="38"/></td>
+				<td><springForm:errors path="phone" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><input type="submit" value="Save" tabindex="9"></td>
+			</tr>
+		</table>
+
+	</springForm:form>	
 	</div>
 
 </div>

@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spgo.business.EmployeeManager;
@@ -40,7 +39,7 @@ import com.spgo.security.EmployeeAuthenticationManager;
    
 @Controller    
 public class EmployeeController {  
-	@SuppressWarnings("unused")
+	
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	@Autowired
 	private EmployeeManager employeeManager;
@@ -150,13 +149,16 @@ public class EmployeeController {
     }
     
     @RequestMapping(value = "/employee/edit", method = RequestMethod.GET)  
-	public String editEmployeeDetails(@RequestParam("email") String email ,ModelMap model) {  
-    	EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
+	public String editEmployeeDetails(ModelMap model) { 
+    	String currentEmail = ContextHelper.getLoginId();
+    	EmployeeModel employee = employeeDao.getEmployeeByLoginId(currentEmail);
     	EmployeeForm form = new EmployeeForm();
     	employeeConverter.convertModelToForm(employee,form);
-    	model.addAttribute("employee", form);
+    	model.addAttribute("employeeForm", form);
         return "editEmployee";
     }    
+
+    
     @RequestMapping(value = "/employee/active", method = RequestMethod.GET)  
 	public String activeEmployee(@RequestParam String id, HttpServletRequest request) {    	
 
@@ -176,6 +178,21 @@ public class EmployeeController {
     	
         return "redirect:/home";  
     }
+    @RequestMapping(value = "/employee/save", method = RequestMethod.POST)  
+	public String saveEmployeeDetails(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) { 
+      	if (bindingResult.hasErrors()) {
+    		model.addAttribute("employeeForm",employeeForm);
+			return "editEmployee";
+		} 
+    	EmployeeModel em = employeeDao.getEmployeeByLoginId(employeeForm.getEmail());
+    	employeeConverter.convertFormToModel(employeeForm, em);	
+    	try {
+			employeeManager.updateEmployee(em);
+		} catch (Exception e) {			
+			logger.info("can not update employee ",e);
+		}
+    	return "employeeDetails";
+    }  
     
     /**
      * Upload single file using Spring Controller

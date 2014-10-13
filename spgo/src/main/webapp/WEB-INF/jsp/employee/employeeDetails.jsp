@@ -38,7 +38,7 @@
 
 <div id="content">
 	<div id="imageframe">
-			<h6> to add image</h6>
+			
 				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employee.profileImage}" /> 
 
 				<form method="POST" action="uploadFile" enctype="multipart/form-data">
@@ -47,7 +47,7 @@
 			    </form>
 			    <br/>
 			    
-				<input type="submit" class="btnEdit"  value="Edit Profile" />			
+				<a href='${contextPath}/employee/edit' >Edit Profile</a>		
 		
 	</div>
 	<div id="detailsframe">
@@ -66,9 +66,17 @@
 			<td>${employee.gender}</td>
 		</tr>
 		<tr>
+			<td> Age : </td>
+			<td>${employee.age}</td>
+		</tr>		
+		<tr>
 			<td> Birth Day : </td>
 			<td><fmt:formatDate type="date" value="${employee.birthday}"/></td>
 		</tr>
+		<tr>
+			<td> Phone : </td>
+			<td>${employee.phone}</td>
+		</tr>		
 
 	</table>	
 	</div>
