@@ -64,7 +64,7 @@ public class EmployeeDao {
 	}
 	
 	public void updateEmployee(EmployeeModel employee) {
-		mongoTemplate.insert(employee, COLLECTION_NAME);		
+		mongoTemplate.save(employee, COLLECTION_NAME);		
 	}
 	
 	public void activeEmployeeByEmail(String email) {
