@@ -52,7 +52,7 @@
 	</div>
 	<div id="detailsframe">
 	
-		<h6>Employee Details </h6>
+		<h2>Employee Detail</h2>
 		<springForm:form method="POST" commandName="employeeForm" id="employeeForm" action="update" >
 		<table>
 			<tr>
@@ -86,8 +86,9 @@
 				<td><springForm:errors path="gender" cssClass="error" /></td>
 			</tr>
 			<tr>
+				<fmt:formatDate value="${employeeForm.birthday}" var="dateString" pattern="dd/MM/yyyy" />
 				<td>Birthday:</td>
-				<td><springForm:input path="birthday"  id="picker"/></td>
+				<td><springForm:input path="birthday" value="${dateString}"  id="picker"/></td>
 				<td><springForm:errors path="birthday" cssClass="error" /></td>
 			</tr>
 			<tr>
