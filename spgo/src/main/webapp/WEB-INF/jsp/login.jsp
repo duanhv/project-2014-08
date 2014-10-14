@@ -21,7 +21,7 @@
 		</tr>
 	  	<tr>
 	  		<td colspan="2">
-		  		<c:if test="${not empty param.login_error}">
+		  		<c:if test="${not empty param.error}">
 				    <div class="error">
 				        Your login attempt was not successful, try again.<br />
 				        Reason: ${sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}

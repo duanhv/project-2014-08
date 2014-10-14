@@ -14,8 +14,12 @@
 	  		</c:if>
 	  	
 	  	</li>
+	  	<li>
+	  		<c:if test="${webAuth}">
+	  			<a href='${contextPath}/employee/changePassword' >Change Password</a>
+	  		</c:if>
+	  	</li>
 		<li>
-		  	
 		  	<c:choose>
 			    <c:when test="${webAuth}">
 			       	<a href='${contextPath}/logout'>Log out</a>
@@ -31,4 +35,5 @@
 	  		</c:if>
 	  	
 	  	</li>
+
 	</ul>
