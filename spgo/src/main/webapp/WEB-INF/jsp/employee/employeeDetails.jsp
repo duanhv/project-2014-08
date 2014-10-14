@@ -54,7 +54,7 @@
 		
 	</div>
 	<div id="detailsframe">
-		<h6>Employee Details </h6>
+		<h2>Employee Detail</h2>
 		<table >
 		<tr>
 			<td> Name : </td>
