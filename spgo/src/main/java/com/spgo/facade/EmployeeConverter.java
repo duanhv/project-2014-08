@@ -49,7 +49,7 @@ public class EmployeeConverter {
 				employeeForm.setAge(Integer.valueOf(employeemodel.getAge()));
 			}
 			if (employeemodel.getGender() != null) {
-				employeeForm.setGender(Gender.MALE.equals(employeemodel.getGender())? Gender.MALE: Gender.FEMALE);
+				employeeForm.setGender(Gender.MALE.name().equals(employeemodel.getGender())? Gender.MALE: Gender.FEMALE);
 			}
 			if(employeemodel.getBirthDay() != null){
 				employeeForm.setBirthday(employeemodel.getBirthDay());
