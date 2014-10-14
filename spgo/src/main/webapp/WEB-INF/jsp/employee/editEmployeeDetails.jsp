@@ -29,7 +29,10 @@
 	        dateFormat:'mm/dd/yyyy'
 	    });
 
-		
+	    $('#fileUploadId').change(function() { 
+	        // select the form and submit
+	        $('#frmUploadFile').submit(); 
+	    });
 	}); 
  	
 </script>
@@ -41,13 +44,10 @@
 			
 				<img width="160px" height="160px" src="${contextPath}/resources/uploadprofile/${employeeForm.profileImage}" /> 
 
-				<form method="POST" action="uploadFile" enctype="multipart/form-data">
-			        File to upload: <input type="file" name="file"><br />
-			        <input type="submit" value="Upload"> Press here to upload the picture!
+				<form method="POST" action="uploadFile" enctype="multipart/form-data" id="frmUploadFile">
+			        File to upload: <input type="file" name="file" id="fileUploadId">
 			    </form>
 			    <br/>
-			    
-					
 		
 	</div>
 	<div id="detailsframe">
