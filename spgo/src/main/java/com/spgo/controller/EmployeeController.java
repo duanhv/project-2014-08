@@ -96,11 +96,15 @@ public class EmployeeController {
 		    	String content 		= messageSource.getMessage("active.content", null, new Locale("en"));
 		    	
 		    	employeeManager.sendActiveEmail(employee.getName(), employee.getEmail(), subject, content);
-
+		    	
+				String successMessage = messageSource.getMessage("create.please.active", null, new Locale("en"));			
+	    		model.addAttribute("successMessage", successMessage);
+		    	
+		    	
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	return "redirect:/home"; 
+	    	return "message"; 
 		}
  
     }
@@ -136,11 +140,15 @@ public class EmployeeController {
         return "homePage";  
     }
     private void autoLogin(EmployeeModel employeeModel ,HttpServletRequest request){
-    	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(employeeModel.getEmail(), employeeModel.getPassword());
-    	request.getSession();
-    	token.setDetails(new WebAuthenticationDetails(request));
-    	Authentication authenticatedUser = employeeAuthenticationManager.authenticate(token);  
-  	    SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+    	try {
+	    	UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(employeeModel.getEmail(), employeeModel.getPassword());
+	    	request.getSession();
+	    	token.setDetails(new WebAuthenticationDetails(request));
+	    	Authentication authenticatedUser = employeeAuthenticationManager.authenticate(token);  
+	  	    SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+    	} catch (Exception e) {
+    		
+    	}
     }
     @RequestMapping(value = "/employee/details", method = RequestMethod.GET)  
 	public String employeeDetails(ModelMap model) {  
@@ -163,7 +171,7 @@ public class EmployeeController {
 
     
     @RequestMapping(value = "/employee/active", method = RequestMethod.GET)  
-	public String activeEmployee(@RequestParam String id, HttpServletRequest request) {    	
+	public String activeEmployee(@RequestParam String id, HttpServletRequest request, ModelMap model) {    	
 
     	try {
     		System.out.println("id Before = " + id);
@@ -175,11 +183,14 @@ public class EmployeeController {
     		EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
 	    	autoLogin(employee, request);	    	
 
+			String successMessage = messageSource.getMessage("create.please.active.sucess", null, new Locale("en"));			
+    		model.addAttribute("successMessage", successMessage);
+	    	
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
     	
-        return "redirect:/home";  
+        return "message";  
     }
     @RequestMapping(value = "/employee/update", method = RequestMethod.POST)  
 	public String updateEmployeeDetails(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) {    	

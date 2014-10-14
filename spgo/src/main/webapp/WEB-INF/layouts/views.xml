@@ -30,5 +30,7 @@
 	<definition name="editEmployee" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/employee/editEmployeeDetails.jsp" />
 	</definition>
-	
+	<definition name="message" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/jsp/message.jsp" />
+	</definition>
 </tiles-definitions>
