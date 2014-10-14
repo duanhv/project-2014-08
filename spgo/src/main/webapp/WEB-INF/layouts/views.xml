@@ -16,6 +16,10 @@
 	<definition name="createEmployee" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/addEmployee.jsp" />
 	</definition>
+	
+	<definition name="changePassword" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/jsp/changePassword.jsp" />
+	</definition>
 
 	<definition name="listEmployee" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/jsp/listEmployee.jsp" />

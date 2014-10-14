@@ -33,6 +33,8 @@ public class EmployeeForm {
     @Phone
     private String phone;
 
+	private String currentPassword;
+    
     @NotNull
 	private String password;
 
@@ -121,5 +123,13 @@ public class EmployeeForm {
 
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
+	}
+
+	public String getCurrentPassword() {
+		return currentPassword;
+	}
+
+	public void setCurrentPassword(String currentPassword) {
+		this.currentPassword = currentPassword;
 	}
 }

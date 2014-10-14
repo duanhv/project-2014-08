@@ -94,4 +94,18 @@ public class EmployeeDao {
 		mongoTemplate.save(employee, COLLECTION_NAME);
 		
 	}
+	
+	public void changePassword(String email, String password) {
+		String tagName = "email";
+		Query query = new Query();
+		query.addCriteria(Criteria.where(tagName).is(email));
+		
+		EmployeeModel employee = mongoTemplate.findOne(query, EmployeeModel.class, COLLECTION_NAME);
+		System.out.println("employee - " + employee);
+
+		employee.setPassword(password);
+		
+		mongoTemplate.save(employee, COLLECTION_NAME);
+		
+	}
 }

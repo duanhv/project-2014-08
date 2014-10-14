@@ -84,4 +84,8 @@ public class EmployeeManager extends BaseManager {
 	public void activeEmployeeByEmail(String email) {
 		getEmployeeDao().activeEmployeeByEmail(email);
 	}
+	
+	public void changePassword(String email, String password) throws Exception {
+		getEmployeeDao().changePassword(email, encodeString(password));
+	}
 }

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
@@ -53,6 +54,8 @@ public class EmployeeController {
 	private EmployeeDao employeeDao;
 	@Autowired
 	private EmployeeAuthenticationManager employeeAuthenticationManager;
+	@Autowired
+	private Md5PasswordEncoder passwordEncoder;
 
     // Guest (allow to add new)
     @RequestMapping(value = "/employee/save", method = RequestMethod.GET)  
@@ -179,7 +182,7 @@ public class EmployeeController {
         return "redirect:/home";  
     }
     @RequestMapping(value = "/employee/update", method = RequestMethod.POST)  
-	public String updateEmployeeDetails(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) { 
+	public String updateEmployeeDetails(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) {    	
       	if (bindingResult.hasErrors()) {
     		model.addAttribute("employeeForm",employeeForm);
 			return "editEmployee";
@@ -242,4 +245,43 @@ public class EmployeeController {
         }
         return "employeeDetails";
     }
+    
+
+    @RequestMapping(value = "/employee/changePassword", method = RequestMethod.GET)  
+	public String changePassword(ModelMap model) {
+    	model.addAttribute("employeeForm",new EmployeeForm());
+        return "changePassword";  
+    }
+    
+    @RequestMapping(value = "/employee/changePassword", method = RequestMethod.POST)  
+	public String changePassword(@ModelAttribute EmployeeForm employeeForm, ModelMap model, BindingResult bindingResult, HttpServletRequest request) {
+
+    	if (bindingResult.hasErrors()) {
+    		model.addAttribute("employeeForm", employeeForm);
+			return "changePassword";
+		} else {
+			try {
+				String currentPassword 	= employeeForm.getCurrentPassword();
+				String password 		= employeeForm.getPassword();
+				String confirmPassword 	= employeeForm.getConfirmPassword();
+			
+				String realCurrentPassword = ContextHelper.getPassword();
+				if (realCurrentPassword != null && realCurrentPassword.equalsIgnoreCase(currentPassword)) {
+					employeeManager.changePassword(ContextHelper.getLoginId(), password);
+					
+					String message = messageSource.getMessage("changePassword.success", null, new Locale("en"));			
+		    		model.addAttribute("successMessage",message);
+				} else {
+					String message = messageSource.getMessage("changePassword.currentPassword.wrong", null, new Locale("en"));			
+		    		model.addAttribute("errorMessage",message);
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	    	return "changePassword"; 
+		}
+ 
+    }
+        
 }

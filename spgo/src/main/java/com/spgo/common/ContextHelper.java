@@ -34,6 +34,23 @@ public abstract class ContextHelper {
         }
         return null;
     }
+
+    /**
+     * 
+     * @return
+     */
+    public static String getPassword() {
+        try {
+            
+        	if (SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null) {
+        		return SecurityContextHolder.getContext().getAuthentication().getCredentials().toString();
+        	}
+            
+        } catch (Exception e) {
+            log.debug("getLoginId() - " + e.getMessage(), e);
+        }
+        return null;
+    }
     
     /**
      * check current user is annonymous or not
