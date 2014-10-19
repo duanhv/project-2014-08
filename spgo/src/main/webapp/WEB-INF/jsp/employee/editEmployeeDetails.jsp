@@ -46,6 +46,7 @@
 
 				<form method="POST" action="uploadFile" enctype="multipart/form-data" id="frmUploadFile">
 			        File to upload: <input type="file" name="file" id="fileUploadId">
+			        				<input type="text" name="fromEdit" value="edit" style="display:none;">	
 			    </form>
 			    <br/>
 		
@@ -96,6 +97,16 @@
 				<td><springForm:input path="phone" tabindex="8" size="38"/></td>
 				<td><springForm:errors path="phone" cssClass="error" /></td>
 			</tr>
+			<tr>
+				<td>Company Name:</td>
+				<td><springForm:input path="companyName" tabindex="8" size="38"/></td>
+				<td><springForm:errors path="companyName" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><springForm:input path="address" tabindex="8" size="38"/></td>
+				<td><springForm:errors path="address" cssClass="error" /></td>
+			</tr>						
 			<tr>
 				<td></td>
 				<td colspan="2"><input type="submit" value="Save" tabindex="9"></td>

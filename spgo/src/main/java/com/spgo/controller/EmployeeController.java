@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -212,7 +213,9 @@ public class EmployeeController {
      * Upload single file using Spring Controller
      */
     @RequestMapping(value = "/employee/uploadFile", method = RequestMethod.POST)
-    public String uploadFileHandler(@RequestParam("file") MultipartFile file, HttpServletRequest request, ModelMap model) {
+    public String uploadFileHandler(@RequestParam("file") MultipartFile file, HttpServletRequest request, ModelMap model ,
+    		@RequestParam(value="fromEdit",required=false) String edit) {
+    	
  
         if (file != null && !file.isEmpty()) {
             try {
@@ -254,6 +257,9 @@ public class EmployeeController {
         } else {
             logger.info("You failed to upload, because the file was empty.");
         }
+        if(StringUtils.isNotBlank(edit)){
+        	return "redirect:/employee/edit";
+        }
         return "employeeDetails";
     }
     
@@ -290,7 +296,7 @@ public class EmployeeController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	    	return "changePassword"; 
+	    	return "redirect:/employee/details"; 
 		}
  
     }

@@ -12,13 +12,14 @@ public class EmployeeConverter {
 
 		employeemodel.setName(employeeForm.getName());
 		employeemodel.setEmail(employeeForm.getEmail());
+		employeemodel.setPhone(employeeForm.getPhone());
 		if(StringUtils.isNotBlank(employeeForm.getPassword())){
 			employeemodel.setPassword(employeeForm.getPassword());
 		}
 		if(StringUtils.isNotBlank(employeeForm.getActive())){
 			employeemodel.setActive(employeeForm.getActive());
 		}
-		employeemodel.setPhone(employeeForm.getPhone());
+			
 		if(StringUtils.isNotBlank(employeeForm.getProfileImage())){
 			employeemodel.setProfileImage(employeeForm.getProfileImage());
 		}
@@ -31,6 +32,12 @@ public class EmployeeConverter {
 		}
 		if(employeeForm.getBirthday() != null){
 			employeemodel.setBirthDay(employeeForm.getBirthday());
+		}
+		if(StringUtils.isNotBlank(employeeForm.getAddress())){
+			employeemodel.setAddress(employeeForm.getAddress());
+		}
+		if(StringUtils.isNotBlank(employeeForm.getCompanyName())){
+			employeemodel.setCompanyName(employeeForm.getCompanyName());
 		}
 		
 	}
@@ -54,6 +61,13 @@ public class EmployeeConverter {
 			if(employeemodel.getBirthDay() != null){
 				employeeForm.setBirthday(employeemodel.getBirthDay());
 			}
+			if(StringUtils.isNotBlank(employeemodel.getAddress())){
+				employeeForm.setAddress(employeemodel.getAddress());
+			}
+			if(StringUtils.isNotBlank(employeemodel.getCompanyName())){
+				employeeForm.setCompanyName(employeemodel.getCompanyName());
+			}
+			
 		}
 	}
 

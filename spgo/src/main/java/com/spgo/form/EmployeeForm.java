@@ -28,7 +28,25 @@ public class EmployeeForm {
     private Gender gender;
     private String active;
     private String profileImage;
-    private Date birthday;    
+    private Date birthday;
+    private String companyName;
+    public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	private String address;
 
     @Phone
     private String phone;

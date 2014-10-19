@@ -80,6 +80,14 @@
 			<td> Phone : </td>
 			<td>${employee.phone}</td>
 		</tr>		
+		<tr>
+			<td> Company Name : </td>
+			<td>${employee.companyName}</td>
+		</tr>	
+		<tr>
+			<td> Address : </td>
+			<td>${employee.address}</td>
+		</tr>					
 
 	</table>	
 	</div>
