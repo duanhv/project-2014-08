@@ -13,6 +13,7 @@
 
 	<security:http auto-config="false" disable-url-rewriting="false" use-expressions="true" entry-point-ref="authenticationEntryPoint">
 		<security:intercept-url pattern="/employee/details" access="isAuthenticated()" />
+		<security:intercept-url pattern="/employee/edit" access="isAuthenticated()" />		
 		<!-- Account -->
 		<!-- security:intercept-url pattern="/employee*"   requires-channel="any" access="isAuthenticated()"/-->
 		

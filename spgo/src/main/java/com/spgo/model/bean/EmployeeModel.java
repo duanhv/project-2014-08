@@ -24,6 +24,24 @@ public class EmployeeModel {
 	private Date updatedDate;
 	private String createdBy;
 	private Date createdDate;
+	private String address;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	private String companyName;
 
 	public int getAge() {
 		return age;
