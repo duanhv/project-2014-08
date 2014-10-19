@@ -181,8 +181,8 @@ public class EmployeeController {
 
     		employeeManager.activeEmployeeByEmail(email);
     		
-    		EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
-	    	autoLogin(employee, request);	    	
+//    		EmployeeModel employee = employeeDao.getEmployeeByLoginId(email);
+//	    	autoLogin(employee, request);	    	
 
 			String successMessage = messageSource.getMessage("create.please.active.sucess", null, new Locale("en"));			
     		model.addAttribute("successMessage", successMessage);
